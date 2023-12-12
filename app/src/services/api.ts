@@ -1,9 +1,15 @@
 import axios from "axios";
-import { IaddUser } from "../Interfaces/interfaces";
+import { ILogin, IaddUser } from "../Interfaces/interfaces";
 //import { IMovieAdd } from "../Interfaces/Interface";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3456",
   //   timeout: 1000,
+});
+const axiosInstancewithheader = axios.create({
+  baseURL: "http://localhost:3456",
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
 });
 // export const getMovies = () => {
 //     return axiosInstance.get("/movies");
@@ -20,6 +26,18 @@ const axiosInstance = axios.create({
 //   export const deleteMovie = (movieId: number) => {
 //     return axiosInstance.delete(`/movies/${movieId}`);
 //   };
+
+//User Routes
 export const addUser = (payload: IaddUser) => {
   return axiosInstance.post("/signup", payload);
+};
+export const loginUserapi = (payload: ILogin) => {
+  return axiosInstance.post("/login", payload);
+};
+export const viewUserInfo = () => {
+  return axiosInstancewithheader.get("/users/userInfo");
+};
+//Movie Routes
+export const getMovies = () => {
+  return axiosInstance.get("/movies/list");
 };

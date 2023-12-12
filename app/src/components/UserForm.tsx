@@ -1,14 +1,9 @@
 import { IaddUser, IupdateUser } from "../Interfaces/interfaces";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { IUserForm } from "../Interfaces/interfaces";
 
-interface IForm {
-  type: string;
-  addingUser?: (u: IaddUser) => void;
-  userToUpdate?: IupdateUser;
-  loading?: boolean;
-}
-const UserForm: React.FC<IForm> = ({
+const UserForm: React.FC<IUserForm> = ({
   type,
   addingUser,
   userToUpdate,
@@ -103,26 +98,26 @@ const UserForm: React.FC<IForm> = ({
 
         {type === "edit" ? (
           <>
-            <div className="User-form-input Edit-buttons">
-              {/* <Link to="/" role="button" className="User-form-btn cancelBtn">
+            <div className="User-form-input-Edit-buttons ">
+              <Link to="/" role="button" className="User-form-btn cancelBtn">
                 Cancel
-              </Link> */}
-              {/* <button type="submit" className="User-form-btn saveBtn">
+              </Link>
+              <button type="submit" className="User-form-btn saveBtn">
                 Save
-              </button> */}
-              <input type="submit" value="save"></input>
+              </button>
+              {/* <input type="submit" value="save"></input> */}
             </div>
           </>
         ) : (
           <>
-            <div className="User-form-input AddFormbuttons">
-              {/* <Link to="/" role="button" className="User-form-btn cancelBtn">
+            <div className="User-form-input-AddFormbuttons">
+              <Link to="/" role="button" className="User-form-btn cancelBtn">
                 Back
-              </Link> */}
-              {/* <button type="submit" className="User-form-btn AddMovieBtn">
+              </Link>
+              <button type="submit" className="User-form-btn AddUserBtn">
                 Add
-              </button> */}
-              <input type="submit" value="submit"></input>
+              </button>
+              {/* <input type="submit" value="submit"></input> */}
             </div>
           </>
         )}

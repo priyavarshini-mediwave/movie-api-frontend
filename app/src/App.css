@@ -40,6 +40,10 @@
 .read-the-docs {
   color: #888;
 } */
+#root {
+  background-color: black;
+  padding: 40px;
+}
 body {
   background-color: black;
 }
@@ -52,6 +56,17 @@ body {
 .HomeName {
   padding-left: 20px;
 }
+.iMDB {
+  background-color: rgb(224, 224, 121);
+  padding: 10px;
+  width: 100px;
+  height: 50px;
+}
+.iMDB p {
+  color: red;
+  font-size: x-large;
+  font-weight: bolder;
+}
 .signInfooter {
   padding: 20px;
   display: flex;
@@ -59,4 +74,68 @@ body {
 }
 .signInfooter a {
   color: yellow;
+}
+.usersignin {
+  margin: auto;
+  max-width: 1500px;
+  padding: 50px;
+  border-radius: 15px;
+  background-color: aliceblue;
+}
+.User-form-input-Edit-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.saveBtn {
+  width: 160px;
+}
+.User-form-input-AddFormbuttons {
+  display: flex;
+  justify-content: space-between;
+}
+.AddUserBtn {
+  width: 160px;
+}
+.cancelBtn {
+  width: 160px;
+  height: 60px;
+}
+.LoginForm {
+  margin: auto;
+  max-width: 600px;
+  margin-top: 50px;
+  padding: 50px;
+  background-color: rgb(212, 215, 215);
+  border-radius: 15px;
+}
+.LoginBtn {
+  width: 160px;
+}
+.moviecards {
+  margin: 20px;
+  padding: 25px;
+  border-radius: 15px;
+  background-color: rgb(216, 223, 228);
+  color: black;
+}
+.moviecards p {
+  color: black;
+}
+.moviecards h3 {
+  color: black;
+}
+.moviecards span {
+  color: red;
+}
+
+.icon a {
+}
+.infoBtn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: ghostwhite;
+  padding: 5px;
+  margin-left: 130px;
+  color: red;
 }
