@@ -40,7 +40,10 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/SignUp" element={<AddUserForm />}></Route>
             <Route path="/login" element={<LoginForm />}></Route>
-            <Route path="/userInfo" element={<UserInfo />}></Route>
+            <Route
+              path="/userInfo"
+              element={<UserInfo openUserInfo={true} />}
+            ></Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

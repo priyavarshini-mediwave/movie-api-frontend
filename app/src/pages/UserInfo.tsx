@@ -4,17 +4,17 @@ import Layout from "../components/Layout";
 import { IuserInfo } from "../Interfaces/interfaces";
 interface IuserInfoForm {
   user?: IuserInfo;
-  showInfofromHome?: boolean;
+  openUserInfo: boolean;
   toggleshowInfo?: (showInfo: boolean) => void;
 }
 const navigate = useNavigate();
 const UserInfo: React.FC<IuserInfoForm> = ({
   user,
   toggleshowInfo,
-  showInfofromHome,
+  openUserInfo,
 }) => {
   console.log(user);
-  const [showInfo, setShowInfo] = useState(showInfofromHome);
+  const [showInfo, setShowInfo] = useState(openUserInfo);
   const handleshowInfo = () => {
     console.log(showInfo);
     setShowInfo(false);

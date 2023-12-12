@@ -115,7 +115,7 @@ const Home = () => {
         <>
           <UserInfo
             user={user}
-            showInfofromHome={showInfo}
+            openUserInfo={showInfo}
             toggleshowInfo={handleInfoClose}
           />
         </>
