@@ -75,7 +75,7 @@ const LoginForm: React.FC = () => {
             placeholder="Enter your email"
             onChange={(e) => handleInputChange(e)}
           ></input>
-          <label htmlFor="user_password">Email</label>
+          <label htmlFor="user_password">Password</label>
           <input
             type="password"
             name="user_password"
@@ -84,12 +84,18 @@ const LoginForm: React.FC = () => {
             onChange={(e) => handleInputChange(e)}
           ></input>
           <div className="User-form-input-AddFormbuttons">
-            <Link to="/" role="button" className="User-form-btn cancelBtn">
+            {/* <Link to="/" role="button" className="User-form-btn cancelBtn">
               Back
-            </Link>
-            <button type="submit" className="User-form-btn LoginBtn">
+            </Link> */}
+          </div>
+          <div className="LoginBtns">
+            <button type="submit" className="LoginBtn">
               Login
             </button>
+            <p>-------Or-------</p>
+            <Link to="/SignUp" role="button" className="LoginFormSignUpBtn">
+              Create an Account
+            </Link>
           </div>
           {showModal && (
             <Modal errorMsg={showModalMsg} closeModal={toggleModal} />

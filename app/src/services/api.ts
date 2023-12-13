@@ -39,5 +39,5 @@ export const viewUserInfo = () => {
 };
 //Movie Routes
 export const getMovies = () => {
-  return axiosInstance.get("/movies/list");
+  return axiosInstancewithheader.get("/movies/list");
 };

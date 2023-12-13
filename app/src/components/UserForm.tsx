@@ -111,8 +111,12 @@ const UserForm: React.FC<IUserForm> = ({
         ) : (
           <>
             <div className="User-form-input-AddFormbuttons">
-              <Link to="/" role="button" className="User-form-btn cancelBtn">
-                Back
+              <Link
+                to="/login"
+                role="button"
+                className="User-form-btn cancelBtn"
+              >
+                Login
               </Link>
               <button type="submit" className="User-form-btn AddUserBtn">
                 Add

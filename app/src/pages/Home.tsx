@@ -44,6 +44,7 @@ const Home = () => {
 
         setMovies(getMoviesResponse.data);
       } catch (error) {
+        console.log(error);
         if (error instanceof Error) {
           console.log(error.message);
           setShowModalMsg({
@@ -119,9 +120,9 @@ const Home = () => {
               </div>
             </div>
             <div></div>
-            <div className="HomeBtnLogin">
+            {/* <div className="HomeBtnLogin">
               <Link to="/login">Login</Link>
-            </div>
+            </div> */}
             <div>
               <button className="infoBtn" onClick={() => handleUserModal()}>
                 Info
@@ -136,9 +137,9 @@ const Home = () => {
             ))}
           </div>
           <div className="signInfooter">
-            <Link to="/SignUp">SignIn Here</Link>
+            <Link to="/login"> Login</Link>
             <span></span>
-            <p>Create a Account ?</p>
+            <p>Token Expired?</p>
           </div>
         </article>
         {/* )} */}

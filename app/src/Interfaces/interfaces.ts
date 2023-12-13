@@ -50,7 +50,7 @@ interface IMovietoshow {
   movie_name: string;
   movie_desc: string;
   release_year: number | undefined;
-  overall_rating: number;
+  rating: number;
 }
 export type {
   ILayout,

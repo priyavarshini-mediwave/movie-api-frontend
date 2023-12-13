@@ -41,6 +41,7 @@
   color: #888;
 } */
 #root {
+  margin: 50px;
   background-color: black;
   padding: 40px;
 }
@@ -80,7 +81,7 @@ body {
   max-width: 1500px;
   padding: 50px;
   border-radius: 15px;
-  background-color: aliceblue;
+  background-color: #ffffff;
 }
 .User-form-input-Edit-buttons {
   display: flex;
@@ -105,11 +106,27 @@ body {
   max-width: 600px;
   margin-top: 50px;
   padding: 50px;
-  background-color: rgb(212, 215, 215);
+  /* background-color: rgb(212, 215, 215); */
+  background-color: #ffffff;
   border-radius: 15px;
 }
+.LoginBtns {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .LoginBtn {
+  background-color: #e4b721;
   width: 160px;
+  color: black;
+}
+
+.LoginFormSignUpBtn {
+  background-color: #e4b721;
+  width: 300px;
+  color: black;
+  text-align: center;
 }
 .moviecards {
   margin: 20px;
@@ -128,8 +145,6 @@ body {
   color: red;
 }
 
-.icon a {
-}
 .infoBtn {
   width: 50px;
   height: 50px;
