@@ -10,15 +10,10 @@ import {
 import { getMovies, viewUserInfo } from "../services/api";
 import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
-import UserInfo from "./UserInfo";
+import UserModal from "./UserModal";
+
 const Home = () => {
   const [movies, setMovies] = useState<IMovietoshow[]>([]);
-  const [user, setuser] = useState<IuserInfo>({
-    first_name: "",
-    last_name: "",
-    email: "",
-    user_name: "",
-  });
 
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -26,12 +21,19 @@ const Home = () => {
     action: "",
     msg: "",
   });
-  const [showInfo, setShowInfo] = useState(false);
+
   const toggleModal = () => {
     setShowModal((prevShowModal) => !prevShowModal);
   };
-  const handleInfoClose = () => {
-    setShowInfo(false);
+  const [showUserModal, setShowUserModal] = useState(false);
+  const [showUserModalMsg, setShowUserModalMsg] = useState<IuserInfo>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    user_name: "",
+  });
+  const toggleUserModal = () => {
+    setShowUserModal((prevShowUserModal) => !prevShowUserModal);
   };
   useEffect(() => {
     async function getMoviesFromAPI() {
@@ -55,74 +57,100 @@ const Home = () => {
       }
     }
     getMoviesFromAPI();
-  }, [movies]);
-  async function handleUserInfo() {
+  }, []);
+  // async function handleUserInfo() {
+  //   try {
+  //     const getuserInfo = await viewUserInfo();
+  //     // console.log("getuserInfo", getuserInfo);
+  //     // console.log("data", getuserInfo.data);
+  //     setuser(getuserInfo.data);
+  //     console.log("user:", user);
+  //     setShowInfo(true);
+  //   } catch (error) {
+  //     console.log(error);
+  //     if (error instanceof Error) {
+  //       setShowModalMsg({
+  //         action: "Unable to show user",
+  //         msg: error.message,
+  //       });
+  //     }
+  //   }
+  // }
+  async function handleUserModal() {
     try {
-      const getuserInfo = await viewUserInfo();
-      // console.log("getuserInfo", getuserInfo);
-      // console.log("data", getuserInfo.data);
-      setuser(getuserInfo.data);
-      console.log("user:", user);
-      setShowInfo(true);
+      const response = await viewUserInfo();
+      console.log(response.data);
+      if (response) {
+        toggleUserModal();
+        setShowUserModalMsg({
+          first_name: response.data.first_name,
+          last_name: response.data.last_name,
+          email: response.data.email,
+          user_name: response.data.user_name,
+        });
+      }
     } catch (error) {
       console.log(error);
       if (error instanceof Error) {
+        toggleUserModal();
         setShowModalMsg({
-          action: "Unable to show user",
+          action: "Failed",
           msg: error.message,
         });
       }
+    } finally {
+      setIsLoading(false);
     }
   }
-
+  const bringback = () => {
+    setShowUserModal(false);
+  };
   return (
-    <Layout title="Home">
-      {/* {isLoading ? (
+    <>
+      <Layout title="Home">
+        {/* {isLoading ? (
         <p>Loading Movies..</p>
       ) : ( */}
-      <article className="container" data-theme="dark">
-        <div className="HomeName grid">
-          <div>
-            <div className="iMDB">
-              <p>iMDB</p>
+        <article className="container" data-theme="dark">
+          <div className="HomeName grid">
+            <div>
+              <div className="iMDB">
+                <p>iMDB</p>
+              </div>
+            </div>
+            <div></div>
+            <div className="HomeBtnLogin">
+              <Link to="/login">Login</Link>
+            </div>
+            <div>
+              <button className="infoBtn" onClick={() => handleUserModal()}>
+                Info
+              </button>
             </div>
           </div>
-          <div></div>
-          <div className="HomeBtnLogin">
-            <Link to="/login">Login</Link>
+          <div className="showMovies grid">
+            {movies.map((m, i) => (
+              <div key={i} className="moviecards">
+                <MovieCard movie={m}></MovieCard>
+              </div>
+            ))}
           </div>
-          <div>
-            <button className="infoBtn" onClick={handleUserInfo}>
-              Info
-            </button>
+          <div className="signInfooter">
+            <Link to="/SignUp">SignIn Here</Link>
+            <span></span>
+            <p>Create a Account ?</p>
           </div>
-        </div>
-        <div className="showMovies grid">
-          {movies.map((m, i) => (
-            <div key={i} className="moviecards">
-              <MovieCard movie={m}></MovieCard>
-            </div>
-          ))}
-        </div>
-        <div className="signInfooter">
-          <Link to="/SignUp">SignIn Here</Link>
-          <span></span>
-          <p>Create a Account ?</p>
-        </div>
-      </article>
-      {/* )} */}
-      {showInfo ? (
-        <>
-          <UserInfo
-            user={user}
-            openUserInfo={showInfo}
-            toggleshowInfo={handleInfoClose}
-          />
-        </>
-      ) : (
-        <></>
+        </article>
+        {/* )} */}
+      </Layout>
+      {showUserModal && (
+        <UserModal
+          userMsg={showUserModalMsg}
+          closeModal={toggleUserModal}
+          navigateToHome={bringback}
+        />
       )}
-    </Layout>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ interface IuserInfoForm {
   openUserInfo: boolean;
   toggleshowInfo?: (showInfo: boolean) => void;
 }
-const navigate = useNavigate();
+// const navigate = useNavigate();
 const UserInfo: React.FC<IuserInfoForm> = ({
   user,
   toggleshowInfo,
@@ -22,7 +22,7 @@ const UserInfo: React.FC<IuserInfoForm> = ({
       toggleshowInfo(showInfo);
     }
 
-    navigate("/");
+    // navigate("/");
   };
   return (
     <Layout title="userInfo">
