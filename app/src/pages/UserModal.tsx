@@ -1,17 +1,23 @@
 import { Link } from "react-router-dom";
-import { IuserInfo } from "../Interfaces/interfaces";
+import { IaddUser } from "../Interfaces/interfaces";
 
 interface IUserModal {
-  userMsg: IuserInfo;
+  userMsg: IaddUser;
   closeModal: () => void;
   navigateToHome?: () => void;
+  onEditAdd: (userMsg: IaddUser) => void;
 }
 
 const UserModal: React.FC<IUserModal> = ({
   userMsg,
   closeModal,
   navigateToHome,
+  onEditAdd,
 }) => {
+  function handleDatatoEdit(userMsg: IaddUser) {
+    console.log("ToEditUser", userMsg);
+    onEditAdd(userMsg);
+  }
   return (
     <dialog open>
       <article>
@@ -21,6 +27,7 @@ const UserModal: React.FC<IUserModal> = ({
           className="close"
           onClick={() => closeModal()}
         ></a>
+        <h1>Your Account Details</h1>
         <p>First_name:{userMsg.first_name}</p>
         <p>Last_name:{userMsg.last_name}</p>
         <p>Email:{userMsg.email}</p>
@@ -33,6 +40,14 @@ const UserModal: React.FC<IUserModal> = ({
             onClick={navigateToHome}
           >
             Confirm
+          </Link>
+          <Link
+            to="/editUser"
+            role="button"
+            data-target="modal-example"
+            onClick={() => handleDatatoEdit(userMsg)}
+          >
+            Update
           </Link>
         </footer>
       </article>

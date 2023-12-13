@@ -8,13 +8,7 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
   console.log("movie", movie);
   let overall_rating = movie.rating;
   let overall_rating_new = overall_rating.toFixed(2);
-  console.log(overall_rating_new);
-  console.log(
-    "overall_rating_new",
-    typeof overall_rating_new,
-    "overall_rating",
-    typeof overall_rating
-  );
+
   return (
     <>
       <h3>{movie.movie_name}</h3>

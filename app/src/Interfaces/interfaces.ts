@@ -5,7 +5,7 @@ interface ILayout {
 interface IUserForm {
   type: string;
   addingUser?: (u: IaddUser) => void;
-  userToUpdate?: IupdateUser;
+  userToUpdate?: IaddUser;
   loading?: boolean;
 }
 interface IaddUser {
@@ -27,14 +27,6 @@ interface IuserInfo {
   user_name: string;
 }
 
-interface IupdateUser {
-  first_name: string;
-  last_name: string;
-  email: string;
-  user_name: string;
-  user_password: string;
-  phone_no: string;
-}
 interface IShowError {
   action: string;
   msg: string;
@@ -57,7 +49,6 @@ export type {
   IUserForm,
   IaddUser,
   ILogin,
-  IupdateUser,
   IShowError,
   IMovie,
   IMovietoshow,

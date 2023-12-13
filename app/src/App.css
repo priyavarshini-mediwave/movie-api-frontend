@@ -101,6 +101,13 @@ body {
   width: 160px;
   height: 60px;
 }
+.userupdate {
+  margin: auto;
+  max-width: 1500px;
+  padding: 50px;
+  border-radius: 15px;
+  background-color: #ffffff;
+}
 .LoginForm {
   margin: auto;
   max-width: 600px;
@@ -146,11 +153,16 @@ body {
 }
 
 .infoBtn {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background-color: ghostwhite;
   padding: 5px;
   margin-left: 130px;
   color: red;
+}
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }

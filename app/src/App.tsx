@@ -7,8 +7,9 @@ import Home from "./pages/Home";
 const AddUserForm = lazy(() => import("./pages/AddUserForm"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const LoginForm = lazy(() => import("./pages/LoginForm"));
-import UserInfo from "./pages/UserInfo";
+
 import ProtectedRoute from "./services/ProtectedRoute";
+import EditUserForm from "./pages/EditUserForm";
 function Loading() {
   return <p>Loading ...</p>;
 }
@@ -49,10 +50,7 @@ function App() {
             />
             <Route path="/SignUp" element={<AddUserForm />}></Route>
             <Route path="/login" element={<LoginForm />}></Route>
-            <Route
-              path="/userInfo"
-              element={<UserInfo openUserInfo={true} />}
-            ></Route>
+            <Route path="/editUser" element={<EditUserForm />}></Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

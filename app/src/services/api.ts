@@ -37,6 +37,9 @@ export const loginUserapi = (payload: ILogin) => {
 export const viewUserInfo = () => {
   return axiosInstancewithheader.get("/users/userInfo");
 };
+export const UpdateUser = (payload: IaddUser) => {
+  return axiosInstancewithheader.patch("/users/user/updateUser", payload);
+};
 //Movie Routes
 export const getMovies = () => {
   return axiosInstancewithheader.get("/movies/list");

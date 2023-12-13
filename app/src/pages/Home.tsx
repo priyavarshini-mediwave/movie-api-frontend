@@ -1,21 +1,29 @@
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
-import {
-  IMovietoshow,
-  IShowError,
-  IaddUser,
-  IuserInfo,
-} from "../Interfaces/interfaces";
+//interfaces
+import { IMovietoshow, IShowError, IaddUser } from "../Interfaces/interfaces";
+
+//services
 import { getMovies, viewUserInfo } from "../services/api";
-import Loading from "../components/Loading";
+
+//components
+//import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import UserModal from "./UserModal";
+import logo from "../assets/placeholder.jpg";
+import EditUserForm from "./EditUserForm";
+
+// Home Component starts here
 
 const Home = () => {
+  //To Show Movies
   const [movies, setMovies] = useState<IMovietoshow[]>([]);
 
+  // To show Loading
   const [isLoading, setIsLoading] = useState(false);
+
+  //To show error and success Modal
   const [showModal, setShowModal] = useState(false);
   const [showModalMsg, setShowModalMsg] = useState<IShowError>({
     action: "",
@@ -25,16 +33,38 @@ const Home = () => {
   const toggleModal = () => {
     setShowModal((prevShowModal) => !prevShowModal);
   };
+
+  //To show user Info in modal
   const [showUserModal, setShowUserModal] = useState(false);
-  const [showUserModalMsg, setShowUserModalMsg] = useState<IuserInfo>({
+  const [showUserModalMsg, setShowUserModalMsg] = useState<IaddUser>({
     first_name: "",
     last_name: "",
     email: "",
     user_name: "",
+    user_password: "",
+    phone_no: "",
   });
   const toggleUserModal = () => {
     setShowUserModal((prevShowUserModal) => !prevShowUserModal);
   };
+
+  //ToEdit User
+  const [showEdit, setshowEdit] = useState(false);
+  const [userData, setUserData] = useState<IaddUser>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    user_name: "",
+    user_password: "",
+    phone_no: "",
+  });
+  function onAddtoHome(data: IaddUser) {
+    console.log(data);
+    setUserData(data);
+    console.log("userData:", userData);
+  }
+
+  //Api Calls
   useEffect(() => {
     async function getMoviesFromAPI() {
       setIsLoading(true);
@@ -59,28 +89,11 @@ const Home = () => {
     }
     getMoviesFromAPI();
   }, []);
-  // async function handleUserInfo() {
-  //   try {
-  //     const getuserInfo = await viewUserInfo();
-  //     // console.log("getuserInfo", getuserInfo);
-  //     // console.log("data", getuserInfo.data);
-  //     setuser(getuserInfo.data);
-  //     console.log("user:", user);
-  //     setShowInfo(true);
-  //   } catch (error) {
-  //     console.log(error);
-  //     if (error instanceof Error) {
-  //       setShowModalMsg({
-  //         action: "Unable to show user",
-  //         msg: error.message,
-  //       });
-  //     }
-  //   }
-  // }
+
   async function handleUserModal() {
     try {
       const response = await viewUserInfo();
-      console.log(response.data);
+      console.log("userInformation", response.data);
       if (response) {
         toggleUserModal();
         setShowUserModalMsg({
@@ -88,6 +101,8 @@ const Home = () => {
           last_name: response.data.last_name,
           email: response.data.email,
           user_name: response.data.user_name,
+          user_password: response.data.user_password,
+          phone_no: response.data.phone_no,
         });
       }
     } catch (error) {
@@ -106,6 +121,7 @@ const Home = () => {
   const bringback = () => {
     setShowUserModal(false);
   };
+
   return (
     <>
       <Layout title="Home">
@@ -125,7 +141,7 @@ const Home = () => {
             </div> */}
             <div>
               <button className="infoBtn" onClick={() => handleUserModal()}>
-                Info
+                <img src={logo} alt="info" className="icon" />
               </button>
             </div>
           </div>
@@ -149,8 +165,11 @@ const Home = () => {
           userMsg={showUserModalMsg}
           closeModal={toggleUserModal}
           navigateToHome={bringback}
+          onEditAdd={onAddtoHome}
         />
       )}
+      {/* {userData && <UserForm type="edit" userToUpdate={userData} />} */}
+      {userData && <EditUserForm userToUpdate={userData} />}
     </>
   );
 };

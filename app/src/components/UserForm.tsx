@@ -1,4 +1,4 @@
-import { IaddUser, IupdateUser } from "../Interfaces/interfaces";
+import { IaddUser } from "../Interfaces/interfaces";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IUserForm } from "../Interfaces/interfaces";
