@@ -14,10 +14,10 @@ const UserModal: React.FC<IUserModal> = ({
   navigateToHome,
   onEditAdd,
 }) => {
-  function handleDatatoEdit(userMsg: IaddUser) {
-    console.log("ToEditUser", userMsg);
-    onEditAdd(userMsg);
-  }
+  // function handleDatatoEdit(userMsg: IaddUser) {
+  //   console.log("ToEditUser", userMsg);
+  //   onEditAdd(userMsg);
+  // }
   return (
     <dialog open>
       <article>
@@ -32,23 +32,25 @@ const UserModal: React.FC<IUserModal> = ({
         <p>Last_name:{userMsg.last_name}</p>
         <p>Email:{userMsg.email}</p>
         <p>User_name:{userMsg.user_name}</p>
-        <footer>
+        <footer className="grid userModalBtns">
           <Link
             to="/"
             role="button"
             data-target="modal-example"
+            className="userModalCancel"
             onClick={navigateToHome}
           >
             Confirm
           </Link>
-          <Link
+          <button onClick={() => onEditAdd(userMsg)}>Update</button>
+          {/* <Link
             to="/editUser"
             role="button"
             data-target="modal-example"
             onClick={() => handleDatatoEdit(userMsg)}
           >
             Update
-          </Link>
+          </Link> */}
         </footer>
       </article>
     </dialog>

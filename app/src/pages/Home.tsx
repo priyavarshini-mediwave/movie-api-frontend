@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
+
 //interfaces
 import { IMovietoshow, IShowError, IaddUser } from "../Interfaces/interfaces";
 
@@ -12,11 +13,13 @@ import { getMovies, viewUserInfo } from "../services/api";
 import MovieCard from "../components/MovieCard";
 import UserModal from "./UserModal";
 import logo from "../assets/placeholder.jpg";
-import EditUserForm from "./EditUserForm";
-
+import Modal from "../components/Modal";
 // Home Component starts here
-
-const Home = () => {
+interface IHome {
+  onEditAddfromHome: (u: IaddUser) => void;
+}
+const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
+  const navigate = useNavigate();
   //To Show Movies
   const [movies, setMovies] = useState<IMovietoshow[]>([]);
 
@@ -50,20 +53,19 @@ const Home = () => {
 
   //ToEdit User
   const [showEdit, setshowEdit] = useState(false);
-  const [userData, setUserData] = useState<IaddUser>({
-    first_name: "",
-    last_name: "",
-    email: "",
-    user_name: "",
-    user_password: "",
-    phone_no: "",
-  });
+  const [userData, setUserData] = useState<any>();
+
   function onAddtoHome(data: IaddUser) {
     console.log(data);
     setUserData(data);
-    console.log("userData:", userData);
   }
 
+  useEffect(() => {
+    console.log("userData:", userData);
+    onEditAddfromHome(userData);
+  }, [userData]);
+  // console.log("showEdit", showEdit);
+  // showEdit ? navigate("/editUser") : navigate("/");
   //Api Calls
   useEffect(() => {
     async function getMoviesFromAPI() {
@@ -75,7 +77,9 @@ const Home = () => {
         setMovies(getMoviesResponse.data);
       } catch (error) {
         console.log(error);
+
         if (error instanceof Error) {
+          setShowModal(true);
           console.log(error.message);
           setShowModalMsg({
             action: "Unable to show movies",
@@ -84,7 +88,7 @@ const Home = () => {
         }
       } finally {
         setIsLoading(false);
-        toggleModal();
+        //toggleModal();
       }
     }
     getMoviesFromAPI();
@@ -121,55 +125,71 @@ const Home = () => {
   const bringback = () => {
     setShowUserModal(false);
   };
+  const logout = () => {
+    let token = localStorage.getItem("token");
 
+    if (token) {
+      localStorage.removeItem("token");
+      navigate("/");
+    }
+  };
   return (
     <>
       <Layout title="Home">
-        {/* {isLoading ? (
-        <p>Loading Movies..</p>
-      ) : ( */}
-        <article className="container" data-theme="dark">
-          <div className="HomeName grid">
-            <div>
-              <div className="iMDB">
-                <p>iMDB</p>
+        {isLoading ? (
+          <p>Loading Movies..</p>
+        ) : (
+          <article className="container" data-theme="dark">
+            <div className="HomeName grid">
+              <div>
+                <div className="iMDB">
+                  <p>iMDB</p>
+                </div>
+              </div>
+
+              <div className="userUtils">
+                <div className="AddMovieIcon">
+                  <Link to="/addMovie">Add a movie</Link>
+                </div>
+                <button className="infoBtn" onClick={() => handleUserModal()}>
+                  <img src={logo} alt="info" className="icon" />
+                </button>
+                <div className="logout">
+                  <button onClick={logout} className="logoutBtn">
+                    Logout
+                  </button>
+                </div>
               </div>
             </div>
-            <div></div>
-            {/* <div className="HomeBtnLogin">
-              <Link to="/login">Login</Link>
-            </div> */}
-            <div>
-              <button className="infoBtn" onClick={() => handleUserModal()}>
-                <img src={logo} alt="info" className="icon" />
-              </button>
+            <div className="showMovies grid">
+              {movies.map((m, i) => (
+                <div key={i} className="moviecards">
+                  <MovieCard movie={m}></MovieCard>
+                </div>
+              ))}
             </div>
-          </div>
-          <div className="showMovies grid">
-            {movies.map((m, i) => (
-              <div key={i} className="moviecards">
-                <MovieCard movie={m}></MovieCard>
-              </div>
-            ))}
-          </div>
-          <div className="signInfooter">
-            <Link to="/login"> Login</Link>
-            <span></span>
-            <p>Token Expired?</p>
-          </div>
-        </article>
-        {/* )} */}
+            <div className="signInfooter">
+              <Link to="/login"> Login</Link>
+              <span></span>
+              <p>Token Expired?</p>
+            </div>
+          </article>
+        )}
       </Layout>
       {showUserModal && (
         <UserModal
           userMsg={showUserModalMsg}
           closeModal={toggleUserModal}
           navigateToHome={bringback}
-          onEditAdd={onAddtoHome}
+          onEditAdd={(data) => {
+            console.log("funcDAta", data);
+            onAddtoHome(data);
+          }}
         />
       )}
+      {showModal && <Modal errorMsg={showModalMsg} closeModal={toggleModal} />}
       {/* {userData && <UserForm type="edit" userToUpdate={userData} />} */}
-      {userData && <EditUserForm userToUpdate={userData} />}
+      {/* {userData && <EditUserForm userToUpdate={userData} />} */}
     </>
   );
 };

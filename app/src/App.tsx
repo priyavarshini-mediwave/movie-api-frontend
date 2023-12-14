@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 const AddUserForm = lazy(() => import("./pages/AddUserForm"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const LoginForm = lazy(() => import("./pages/LoginForm"));
-
+import { useNavigate } from "react-router-dom";
 import ProtectedRoute from "./services/ProtectedRoute";
 import EditUserForm from "./pages/EditUserForm";
 function Loading() {
@@ -22,17 +22,14 @@ function App() {
     user_password: "",
     phone_no: "",
   });
-  // function onAddtoApp(data: IaddUser) {
-  //   console.log(data);
-  //   setData(data);
-  // }
-  // return (
-  //   // <article data-theme="dark">
-  //   //   {/* <h1>vite</h1> */}
-  //   //   <AddUserForm />
-  //   // </article>
+  // const navigate = useNavigate();
+  function onAddToApp(dataFromHome: IaddUser) {
+    console.log("dataToApp", data);
+    setData(dataFromHome);
+    console.log("datatoEditForm", data);
 
-  // );
+    // navigate("/editUser");
+  }
 
   return (
     <>
@@ -44,13 +41,21 @@ function App() {
               path="/"
               element={
                 <ProtectedRoute>
-                  <Home />
+                  <Home
+                    onEditAddfromHome={(dataFromHome) => {
+                      //console.log("dataFromHome", dataFromHome);
+                      onAddToApp(dataFromHome);
+                    }}
+                  />
                 </ProtectedRoute>
               }
             />
             <Route path="/SignUp" element={<AddUserForm />}></Route>
             <Route path="/login" element={<LoginForm />}></Route>
-            <Route path="/editUser" element={<EditUserForm />}></Route>
+            <Route
+              path="/editUser"
+              element={<EditUserForm userToUpdate={data} />}
+            ></Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IMovietoshow } from "../Interfaces/interfaces";
 
 interface IMovieCard {
@@ -17,6 +18,17 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
       <p className="rating">
         Rating:<span>{overall_rating_new}</span>
       </p>
+      <div className="grid movieCardBtns">
+        <Link to="/viewOneMovie" role="button">
+          View full details
+        </Link>
+        <Link to="/UpdateMovie" role="button">
+          Update Movie
+        </Link>
+      </div>
+      <Link to="/AddRating" role="button" className="AddRatingBtn">
+        Add Rating
+      </Link>
     </>
   );
 };

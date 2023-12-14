@@ -10,7 +10,7 @@ interface IEditform {
 }
 
 const EditUserForm: React.FC<IEditform> = ({ userToUpdate }) => {
-  console.log(userToUpdate);
+  console.log("userToUpdate", userToUpdate);
   const [isLoading, setIsLoading] = useState(false);
 
   const [showModal, setShowModal] = useState(false);

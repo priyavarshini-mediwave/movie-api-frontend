@@ -48,6 +48,9 @@
 body {
   background-color: black;
 }
+.Not-found h1 {
+  color: #ffffff;
+}
 .HomeBtnLogin {
   margin-right: 10px;
 }
@@ -67,6 +70,12 @@ body {
   color: red;
   font-size: x-large;
   font-weight: bolder;
+}
+.userUtils {
+  display: flex;
+}
+.userUtils a {
+  color: #e4b721;
 }
 .signInfooter {
   padding: 20px;
@@ -151,18 +160,43 @@ body {
 .moviecards span {
   color: red;
 }
+.movieCardBtns {
+  grid-template-columns: 1fr 1fr;
+}
+.AddRatingBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  margin: 25px auto;
+  max-width: 200px;
+}
 .infoBtn {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   background-color: ghostwhite;
   padding: 5px;
-  margin-left: 130px;
+  margin-left: 74px;
+  margin-right: 16px;
   color: red;
 }
 .icon {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+}
+.logout {
+  width: 160px;
+}
+.logoutBtn {
+  background-color: #e4b721;
+  color: black;
+}
+.userModalBtns {
+  gap: 100px;
+}
+.userModalCancel {
+  width: 130px;
+  height: 60px;
 }
