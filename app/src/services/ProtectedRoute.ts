@@ -12,7 +12,7 @@ const ProtectedRoute: React.FC<IProtectedRoute> = ({ children }) => {
   // let location = useLocation();
   let user_token = localStorage.getItem("token");
   console.log(user_token);
-  return user_token ? children : Navigate({ to: "/login" });
+  return user_token ? children : Navigate({ to: "/login", replace: true });
   // if (!user_token) {
   //   return <Navigate>
   // }

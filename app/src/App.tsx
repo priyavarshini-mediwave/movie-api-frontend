@@ -10,6 +10,7 @@ const LoginForm = lazy(() => import("./pages/LoginForm"));
 import { useNavigate } from "react-router-dom";
 import ProtectedRoute from "./services/ProtectedRoute";
 import EditUserForm from "./pages/EditUserForm";
+import AddMovie from "./pages/AddMovie";
 function Loading() {
   return <p>Loading ...</p>;
 }
@@ -56,6 +57,7 @@ function App() {
               path="/editUser"
               element={<EditUserForm userToUpdate={data} />}
             ></Route>
+            <Route path="addMovie" element={<AddMovie />}></Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

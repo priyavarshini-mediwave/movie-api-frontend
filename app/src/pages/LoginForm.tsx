@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ILogin, IShowError } from "../Interfaces/interfaces";
 import Loading from "../components/Loading";
 import { loginUserapi } from "../services/api";
@@ -15,7 +15,7 @@ const LoginForm: React.FC = () => {
     action: "",
     msg: "",
   });
-
+  const navigate = useNavigate();
   const toggleModal = () => {
     setShowModal((prevShowModal) => !prevShowModal);
   };
@@ -31,14 +31,15 @@ const LoginForm: React.FC = () => {
       }
       const userLoggedIn = await loginUserapi(LoginPayload);
       if (userLoggedIn) {
-        setShowModalMsg({
-          action: "Success",
-          msg: `Login Successful!`,
-        });
+        // setShowModalMsg({
+        //   action: "Success",
+        //   msg: `Login Successful!`,
+        // });
         let token = userLoggedIn.data.created_token;
         console.log("userLoggedIn", userLoggedIn);
         console.log(token);
         localStorage.setItem("token", token);
+        navigate("/");
       }
 
       //navigate("/");

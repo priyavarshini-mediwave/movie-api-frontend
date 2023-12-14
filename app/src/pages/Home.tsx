@@ -73,7 +73,6 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
 
       try {
         const getMoviesResponse = await getMovies();
-
         setMovies(getMoviesResponse.data);
       } catch (error) {
         console.log(error);
@@ -126,12 +125,8 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
     setShowUserModal(false);
   };
   const logout = () => {
-    let token = localStorage.getItem("token");
-
-    if (token) {
-      localStorage.removeItem("token");
-      navigate("/");
-    }
+    localStorage.clear();
+    navigate("/");
   };
   return (
     <>

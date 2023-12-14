@@ -32,7 +32,6 @@ interface IShowError {
   msg: string;
 }
 interface IMovie {
-  user_id: string;
   movie_name: string;
   movie_desc: string;
   release_year: number | undefined;
