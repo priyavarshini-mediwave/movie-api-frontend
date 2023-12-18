@@ -200,22 +200,24 @@ body {
   width: 130px;
   height: 60px;
 }
-
+.pagination {
+  background-color: #ffffff;
+}
 @media (min-width: 768px) {
-  .cardsGrid {
+  .showMovies {
     grid-template-columns: 1fr 1fr;
     gap: 30px;
   }
 }
 @media (min-width: 1280px) {
-  .cardsGrid {
+  .showMovies {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 50px;
   }
 }
 @media (min-width: 1920px) {
-  .cardsGrid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+  .showMovies {
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 50px;
   }
 }

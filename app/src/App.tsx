@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 const AddUserForm = lazy(() => import("./pages/AddUserForm"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const LoginForm = lazy(() => import("./pages/LoginForm"));
-import { useNavigate } from "react-router-dom";
+const AddRating = lazy(() => import("./pages/AddRating"));
 import ProtectedRoute from "./services/ProtectedRoute";
 import EditUserForm from "./pages/EditUserForm";
 import AddMovie from "./pages/AddMovie";
@@ -58,6 +58,7 @@ function App() {
               element={<EditUserForm userToUpdate={data} />}
             ></Route>
             <Route path="addMovie" element={<AddMovie />}></Route>
+            <Route path="/AddRating" element={<AddRating />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

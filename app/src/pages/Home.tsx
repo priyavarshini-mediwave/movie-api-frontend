@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
-
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 //interfaces
 import { IMovietoshow, IShowError, IaddUser } from "../Interfaces/interfaces";
 
@@ -14,10 +15,12 @@ import MovieCard from "../components/MovieCard";
 import UserModal from "./UserModal";
 import logo from "../assets/placeholder.jpg";
 import Modal from "../components/Modal";
+
 // Home Component starts here
 interface IHome {
   onEditAddfromHome: (u: IaddUser) => void;
 }
+
 const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   const navigate = useNavigate();
   //To Show Movies
@@ -52,7 +55,7 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   };
 
   //ToEdit User
-  const [showEdit, setshowEdit] = useState(false);
+  // const [showEdit, setshowEdit] = useState(false);
   const [userData, setUserData] = useState<any>();
 
   function onAddtoHome(data: IaddUser) {
@@ -66,6 +69,15 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   }, [userData]);
   // console.log("showEdit", showEdit);
   // showEdit ? navigate("/editUser") : navigate("/");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState(1);
+  const totalPages = 5;
+  const itemsPerPage = 3;
+  const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
+  };
+
   //Api Calls
   useEffect(() => {
     async function getMoviesFromAPI() {
@@ -91,7 +103,7 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
       }
     }
     getMoviesFromAPI();
-  }, []);
+  }, [currentPage, itemsPerPage]);
 
   async function handleUserModal() {
     try {
@@ -126,7 +138,7 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   };
   const logout = () => {
     localStorage.clear();
-    navigate("/");
+    navigate("/login");
   };
   return (
     <>
@@ -168,6 +180,16 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
               <span></span>
               <p>Token Expired?</p>
             </div>
+            <Stack spacing={2}>
+              <Pagination
+                className="pagination"
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                shape="rounded"
+              />
+            </Stack>
           </article>
         )}
       </Layout>
@@ -183,8 +205,6 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
         />
       )}
       {showModal && <Modal errorMsg={showModalMsg} closeModal={toggleModal} />}
-      {/* {userData && <UserForm type="edit" userToUpdate={userData} />} */}
-      {/* {userData && <EditUserForm userToUpdate={userData} />} */}
     </>
   );
 };
