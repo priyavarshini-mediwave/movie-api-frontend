@@ -20,24 +20,9 @@ const UserForm: React.FC<IUserForm> = ({
       phone_no: "",
     }
   );
-  // if (access_token && userToUpdate) {
-  //   //setUser(userToUpdate);
-  //   setUser(userToUpdate);
-  // } else {
-  //   setUser({
-  //     first_name: "",
-  //     last_name: "",
-  //     email: "",
-  //     user_name: "",
-  //     user_password: "",
-  //     phone_no: "",
-  //   });
-  // }
 
   console.log("Say user:", user);
-  //console.log("loading", loading);
-  //const [newLoading, setnewLoading] = useState(loading);
-  //console.log("newLoading", newLoading);
+
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -47,11 +32,23 @@ const UserForm: React.FC<IUserForm> = ({
     e.preventDefault();
     //setnewLoading(true);
     //console.log(newLoading);
-    if (addingUser) {
-      addingUser(user);
+    if (conPass === user.user_password) {
+      if (addingUser) {
+        addingUser(user);
+      }
+    } else {
+      setPassError({ ...passError, error: "password not match", show: true });
     }
   }
-
+  const [conPass, setConpass] = useState("");
+  const [passError, setPassError] = useState({
+    error: "",
+    show: false,
+  });
+  function handleconfirmPassword(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target;
+    setConpass(value);
+  }
   return (
     <div className="container">
       <form onSubmit={(e) => handleAdd(e)}>
@@ -102,6 +99,18 @@ const UserForm: React.FC<IUserForm> = ({
           placeholder={"Enter your Password" || user.user_password}
           onChange={(e) => handleInputChange(e)}
         ></input>
+        <label htmlFor="confirm-password">
+          confirm-Password
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            placeholder="confirm Password"
+            onChange={handleconfirmPassword}
+            required
+          />
+          {passError.show && <p style={{ color: "red" }}>{passError.error}</p>}
+        </label>
         <label htmlFor="phone_no"> Contact Number :</label>
         <input
           type="text"

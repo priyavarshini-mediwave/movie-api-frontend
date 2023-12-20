@@ -14,6 +14,7 @@ import { getMovies, viewUserInfo } from "../services/api";
 import MovieCard from "../components/MovieCard";
 import UserModal from "./UserModal";
 import logo from "../assets/placeholder.jpg";
+import christmas from "../assets/santa-dance-christmas-music.gif";
 import Modal from "../components/Modal";
 
 // Home Component starts here
@@ -79,31 +80,6 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
     setCurrentPage(page);
   };
 
-  //Api Calls
-  // useEffect(() => {
-  //   async function getMoviesFromAPI() {
-  //     setIsLoading(true);
-
-  //     try {
-  //       const getMoviesResponse = await getMovies();
-  //       setMovies(getMoviesResponse.data);
-  //     } catch (error) {
-  //       if (error instanceof Error) {
-  //         setShowModal(true);
-  //         console.log(error.message);
-  //         setShowModalMsg({
-  //           action: "Unable to show movies",
-  //           msg: error.message,
-  //         });
-  //       }
-  //     } finally {
-  //       setIsLoading(false);
-  //       //toggleModal();
-  //     }
-  //   }
-  //   getMoviesFromAPI();
-  // }, [currentPage, itemsPerPage]);
-
   useEffect(() => {
     async function getMoviesFromAPI() {
       setIsLoading(true);
@@ -112,7 +88,7 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
         const response = await getMovies(currentPage, itemsPerPage);
         setMovies(response.data.movies);
         console.log(response);
-        // Dynamically calculate total pages based on the response length
+
         const totalItems = response.data.totalItems;
         const calculatedTotalPages = Math.ceil(totalItems / itemsPerPage);
         setTotalPages(calculatedTotalPages || 1); // Ensure at least 1 page
@@ -200,6 +176,14 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
                   </button>
                 </div>
               </div>
+            </div>
+            <div className="SearchDiv grid">
+              <img src={christmas} alt="santa"></img>
+
+              <label htmlFor="search" className="search">
+                <input type="text" className="searchBar"></input>
+                <button className="searchBtn"> 🔍</button>
+              </label>
             </div>
             <div className="showMovies grid">
               {movies.map((m, i) => (

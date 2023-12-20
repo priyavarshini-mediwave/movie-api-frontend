@@ -19,43 +19,57 @@ const LoginForm: React.FC = () => {
   const toggleModal = () => {
     setShowModal((prevShowModal) => !prevShowModal);
   };
+  const [conPass, setConpass] = useState("");
+  const [passError, setPassError] = useState({
+    error: "",
+    show: false,
+  });
+  function handleconfirmPassword(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target;
+    setConpass(value);
+  }
   async function handleUserLogintoDb(loginUser: ILogin) {
     //setIsLoading(true);
-    try {
-      const LoginPayload = {
-        email: loginUser.email,
-        user_password: loginUser.user_password,
-      };
-      {
-        isLoading ? <Loading /> : <></>;
-      }
-      const userLoggedIn = await loginUserapi(LoginPayload);
-      if (userLoggedIn) {
-        // setShowModalMsg({
-        //   action: "Success",
-        //   msg: `Login Successful!`,
-        // });
-        let token = userLoggedIn.data.created_token;
-        console.log("userLoggedIn", userLoggedIn);
-        console.log(token);
-        localStorage.setItem("token", token);
-        navigate("/");
-      }
+    if (conPass === loginUser.user_password) {
+      try {
+        const LoginPayload = {
+          email: loginUser.email,
+          user_password: loginUser.user_password,
+        };
+        {
+          isLoading ? <Loading /> : <></>;
+        }
+        const userLoggedIn = await loginUserapi(LoginPayload);
+        if (userLoggedIn) {
+          // setShowModalMsg({
+          //   action: "Success",
+          //   msg: `Login Successful!`,
+          // });
+          let token = userLoggedIn.data.created_token;
+          console.log("userLoggedIn", userLoggedIn);
+          console.log(token);
+          localStorage.setItem("token", token);
+          navigate("/");
+        }
 
-      //navigate("/");
-    } catch (error) {
-      console.log("Errored", error);
-      if (error instanceof Error) {
-        setShowModalMsg({
-          action: "failed",
-          msg: error.message,
-        });
+        //navigate("/");
+      } catch (error) {
+        console.log("Errored", error);
+        if (error instanceof Error) {
+          setShowModalMsg({
+            action: "failed",
+            msg: error.message,
+          });
+        }
+      } finally {
+        setIsLoading(false);
+        toggleModal();
       }
-    } finally {
-      setIsLoading(false);
-      toggleModal();
+    } else {
+      setPassError({ ...passError, error: "password not match", show: true });
     }
   }
+
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setLoginUser({ ...loginUser, [name]: value });
@@ -64,6 +78,7 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     handleUserLogintoDb(loginUser);
   };
+
   return (
     <>
       <div className="LoginForm">
@@ -84,6 +99,20 @@ const LoginForm: React.FC = () => {
             placeholder="Enter your password"
             onChange={(e) => handleInputChange(e)}
           ></input>
+          <label htmlFor="confirm-password">
+            confirm-Password
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              placeholder="confirm Password"
+              onChange={handleconfirmPassword}
+              required
+            />
+            {passError.show && (
+              <p style={{ color: "red" }}>{passError.error}</p>
+            )}
+          </label>
           <div className="User-form-input-AddFormbuttons">
             {/* <Link to="/" role="button" className="User-form-btn cancelBtn">
               Back
