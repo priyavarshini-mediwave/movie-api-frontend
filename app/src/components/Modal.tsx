@@ -10,7 +10,7 @@ interface IModal {
 const Modal: React.FC<IModal> = ({ errorMsg, closeModal, navigateToHome }) => {
   return (
     <dialog open>
-      <article>
+      <article className="ModalDialog">
         <a
           href="#close"
           aria-label="Close"

@@ -37,11 +37,15 @@ interface IMovie {
   release_year: number | undefined;
 }
 interface IMovietoshow {
+  movie_id: string;
   user_id: string;
   movie_name: string;
   movie_desc: string;
   release_year: number | undefined;
   rating: number;
+}
+interface IaddRatingPayload {
+  rating_value: number;
 }
 export type {
   ILayout,
@@ -52,4 +56,5 @@ export type {
   IMovie,
   IMovietoshow,
   IuserInfo,
+  IaddRatingPayload,
 };

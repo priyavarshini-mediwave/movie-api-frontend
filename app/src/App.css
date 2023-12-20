@@ -203,6 +203,9 @@ body {
 .pagination {
   background-color: #ffffff;
 }
+.ModalDialog {
+  background-color: aliceblue;
+}
 @media (min-width: 768px) {
   .showMovies {
     grid-template-columns: 1fr 1fr;

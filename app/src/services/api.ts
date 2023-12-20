@@ -1,5 +1,10 @@
 import axios from "axios";
-import { ILogin, IMovie, IaddUser } from "../Interfaces/interfaces";
+import {
+  ILogin,
+  IMovie,
+  IaddUser,
+  IaddRatingPayload,
+} from "../Interfaces/interfaces";
 //import { IMovieAdd } from "../Interfaces/Interface";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3456",
@@ -54,4 +59,8 @@ export const getMovies = () => {
 };
 export const addMovieApi = (payload: IMovie) => {
   return axiosInstance.post("/movies", payload, setHeaders());
+};
+//Add Rating
+export const addRatingApi = (payload: IaddRatingPayload, movieId: string) => {
+  return axiosInstance.post(`/movies/${movieId}/rating`, payload, setHeaders());
 };
