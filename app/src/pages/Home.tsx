@@ -55,7 +55,7 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   };
 
   //ToEdit User
-  // const [showEdit, setshowEdit] = useState(false);
+  const [showEdit, setshowEdit] = useState(false);
   const [userData, setUserData] = useState<any>();
 
   function onAddtoHome(data: IaddUser) {
@@ -70,25 +70,59 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   // console.log("showEdit", showEdit);
   // showEdit ? navigate("/editUser") : navigate("/");
 
+  //Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  // const [totalPages, setTotalPages] = useState(1);
-  const totalPages = 5;
+  const [totalPages, setTotalPages] = useState(1); // Initialize with 1 page initially
   const itemsPerPage = 3;
+
   const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
   };
 
   //Api Calls
+  // useEffect(() => {
+  //   async function getMoviesFromAPI() {
+  //     setIsLoading(true);
+
+  //     try {
+  //       const getMoviesResponse = await getMovies();
+  //       setMovies(getMoviesResponse.data);
+  //     } catch (error) {
+  //       if (error instanceof Error) {
+  //         setShowModal(true);
+  //         console.log(error.message);
+  //         setShowModalMsg({
+  //           action: "Unable to show movies",
+  //           msg: error.message,
+  //         });
+  //       }
+  //     } finally {
+  //       setIsLoading(false);
+  //       //toggleModal();
+  //     }
+  //   }
+  //   getMoviesFromAPI();
+  // }, [currentPage, itemsPerPage]);
+
   useEffect(() => {
     async function getMoviesFromAPI() {
       setIsLoading(true);
 
       try {
-        const getMoviesResponse = await getMovies();
-        setMovies(getMoviesResponse.data);
+        const response = await getMovies(currentPage, itemsPerPage);
+        setMovies(response.data.movies);
+        console.log(response);
+        // Dynamically calculate total pages based on the response length
+        const totalItems = response.data.totalItems;
+        const calculatedTotalPages = Math.ceil(totalItems / itemsPerPage);
+        setTotalPages(calculatedTotalPages || 1); // Ensure at least 1 page
+        console.log(
+          "calculatedTotalPages",
+          calculatedTotalPages,
+          "totalItems",
+          totalItems
+        );
       } catch (error) {
-        console.log(error);
-
         if (error instanceof Error) {
           setShowModal(true);
           console.log(error.message);
@@ -99,7 +133,6 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
         }
       } finally {
         setIsLoading(false);
-        //toggleModal();
       }
     }
     getMoviesFromAPI();
@@ -108,7 +141,7 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   async function handleUserModal() {
     try {
       const response = await viewUserInfo();
-      console.log("userInformation", response.data);
+
       if (response) {
         toggleUserModal();
         setShowUserModalMsg({
@@ -188,6 +221,9 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
                 onChange={handlePageChange}
                 variant="outlined"
                 shape="rounded"
+                disabled={isLoading} // Disable while loading
+                hideNextButton={currentPage === totalPages}
+                hidePrevButton={currentPage === 1}
               />
             </Stack>
           </article>

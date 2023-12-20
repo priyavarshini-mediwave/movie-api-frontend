@@ -12,10 +12,7 @@ interface IMovieCard {
 const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
   // console.log("movie", movie);
   let overall_rating = movie.rating;
-  // let overall_rating_new = overall_rating.toFixed(2);
-  // const [ratingValue, setRatingValue] = useState({
-  //   rating_value: 0,
-  // });
+
   const [showModal, setShowModal] = useState(false);
   const [showModalMsg, setShowModalMsg] = useState<IShowError>({
     action: "",
@@ -27,17 +24,10 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
   };
   const [isLoading, setIsLoading] = useState(false);
   const [rating_value, setRatingValue] = useState(0);
-  console.log("your newValue is " + rating_value);
 
   useEffect(() => {
-    // const addRating = () => {
-    //   console.log("your ratingValue is " + ratingValue);
-    // };
-    // addRating();
     async function addRating() {
       try {
-        console.log("your ratingValue is " + rating_value);
-        console.log(movie.movie_id);
         const addRAtingPayload = {
           rating_value: rating_value,
         };
@@ -45,7 +35,7 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
           addRAtingPayload,
           movie.movie_id
         );
-        console.log(addRatingResponse);
+
         if (addRatingResponse) {
           setShowModalMsg({
             action: "Success",
@@ -74,19 +64,8 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
 
       <p className="movie_desc"> {movie.movie_desc}</p>
       <p className="release_year">Released In: {movie.release_year}</p>
-      {/* <p className="rating">
-        Rating:<span>{overall_rating_new}</span>
-      </p> */}
 
-      <Rating
-        name="simple-controlled"
-        value={overall_rating}
-        readOnly
-        // onChange={(event, newValue) => {
-        //   setRatingValue(newValue);
-        //   console.log("your newValue is " + newValue, ratingValue);
-        // }}
-      />
+      <Rating name="simple-controlled" value={overall_rating} readOnly />
       <div className="grid movieCardBtns">
         <Link to={`/movies/list/${movie.movie_id}`} role="button">
           View Movie

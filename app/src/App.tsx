@@ -23,13 +23,11 @@ function App() {
     user_password: "",
     phone_no: "",
   });
-  // const navigate = useNavigate();
+
   function onAddToApp(dataFromHome: IaddUser) {
     console.log("dataToApp", data);
     setData(dataFromHome);
     console.log("datatoEditForm", data);
-
-    // navigate("/editUser");
   }
 
   return (

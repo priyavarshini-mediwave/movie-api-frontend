@@ -54,8 +54,17 @@ export const UpdateUser = (payload: IaddUser) => {
   return axiosInstance.patch("/users/user/updateUser", payload, setHeaders());
 };
 //Movie Routes
-export const getMovies = () => {
-  return axiosInstance.get("/movies/list", setHeaders());
+// export const getMovies = () => {
+//   return axiosInstance.get("/movies/list", setHeaders());
+// };
+export const getMovies = (page: number, itemsPerPage: number) => {
+  return axiosInstance.get("/movies/list", {
+    ...setHeaders(),
+    params: {
+      page,
+      itemsPerPage,
+    },
+  });
 };
 export const addMovieApi = (payload: IMovie) => {
   return axiosInstance.post("/movies", payload, setHeaders());
