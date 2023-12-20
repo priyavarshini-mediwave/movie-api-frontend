@@ -60,6 +60,9 @@ export const getMovies = () => {
 export const addMovieApi = (payload: IMovie) => {
   return axiosInstance.post("/movies", payload, setHeaders());
 };
+export const getOneMovieApi = (movie_id: string) => {
+  return axiosInstance.get(`/movies/list/${movie_id}`, setHeaders());
+};
 //Add Rating
 export const addRatingApi = (payload: IaddRatingPayload, movieId: string) => {
   return axiosInstance.post(`/movies/${movieId}/rating`, payload, setHeaders());

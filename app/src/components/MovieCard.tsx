@@ -88,21 +88,25 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
         // }}
       />
       <div className="grid movieCardBtns">
-        <Link to="/viewOneMovie" role="button">
-          View full details
+        <Link to={`/movies/list/${movie.movie_id}`} role="button">
+          View Movie
         </Link>
         <Link to="/UpdateMovie" role="button">
           Update Movie
         </Link>
       </div>
+      <div className="Rating">
+        <p>Rate the movie here:</p>
+        <Rating
+          className="RatingStars"
+          name="simple-controlled"
+          value={rating_value}
+          onChange={(e, newValue) => {
+            setRatingValue(newValue || 0);
+          }}
+        />
+      </div>
 
-      <Rating
-        name="simple-controlled"
-        value={rating_value}
-        onChange={(e, newValue) => {
-          setRatingValue(newValue || 0);
-        }}
-      />
       {showModal && <Modal errorMsg={showModalMsg} closeModal={toggleModal} />}
     </>
   );

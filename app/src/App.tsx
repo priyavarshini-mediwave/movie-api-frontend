@@ -7,10 +7,10 @@ import Home from "./pages/Home";
 const AddUserForm = lazy(() => import("./pages/AddUserForm"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const LoginForm = lazy(() => import("./pages/LoginForm"));
-const AddRating = lazy(() => import("./pages/AddRating"));
+
 import ProtectedRoute from "./services/ProtectedRoute";
-import EditUserForm from "./pages/EditUserForm";
-import AddMovie from "./pages/AddMovie";
+const AddMovie = lazy(() => import("./pages/AddMovie"));
+const ViewOneMovie = lazy(() => import("./pages/ViewOneMovie"));
 function Loading() {
   return <p>Loading ...</p>;
 }
@@ -53,12 +53,13 @@ function App() {
             />
             <Route path="/SignUp" element={<AddUserForm />}></Route>
             <Route path="/login" element={<LoginForm />}></Route>
-            <Route
+            {/* <Route
               path="/editUser"
               element={<EditUserForm userToUpdate={data} />}
-            ></Route>
+            ></Route> */}
             <Route path="addMovie" element={<AddMovie />}></Route>
-            <Route path="/AddRating" element={<AddRating />} />
+            <Route path="/movies/list/:id" element={<ViewOneMovie />} />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
