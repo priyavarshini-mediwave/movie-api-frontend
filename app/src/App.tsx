@@ -9,6 +9,7 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const LoginForm = lazy(() => import("./pages/LoginForm"));
 
 import ProtectedRoute from "./services/ProtectedRoute";
+const EditMovie = lazy(() => import("./pages/EditMovie"));
 const AddMovie = lazy(() => import("./pages/AddMovie"));
 const ViewOneMovie = lazy(() => import("./pages/ViewOneMovie"));
 function Loading() {
@@ -57,7 +58,10 @@ function App() {
             ></Route> */}
             <Route path="addMovie" element={<AddMovie />}></Route>
             <Route path="/movies/list/:id" element={<ViewOneMovie />} />
-
+            <Route
+              path="/movies/list/update/:id"
+              element={<EditMovie />}
+            ></Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
