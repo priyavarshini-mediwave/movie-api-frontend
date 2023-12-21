@@ -8,16 +8,21 @@
 
 ## Use axios to fetch data from the api
 
+### Set Headers for Axios instance for authorization
+
 #### Functions
 
     User
         * Create a account- SignUp
         * Login
+        * View User Details
     Movies
         * Add a Movie
         * Show all Movies with Overall Rating,search
         * View Details of a movie - with Added by and Rating Details
         * Add Rating
+
+##### Pagination and Rating with Material UI
 
 ### To run
 
