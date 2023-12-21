@@ -67,45 +67,47 @@ const AddMovie = () => {
   return (
     <>
       <Layout title="Add new Movie">
-        <form onSubmit={(e) => handleAddMovie(e)}>
-          <label htmlFor="movie_name">Movie Name</label>
-          <input
-            type="text"
-            name="movie_name"
-            id="movie_name"
-            placeholder="Enter Movie Name"
-            onChange={(e) => handleInputChange(e)}
-          ></input>
-          <label htmlFor="movie_desc">Movie Description</label>
-          <input
-            type="text"
-            name="movie_desc"
-            id="movie_desc"
-            placeholder="Give a brief description of the movie"
-            onChange={(e) => handleInputChange(e)}
-          ></input>
-          <label htmlFor="release_year">Release Year</label>
-          <input
-            type="text"
-            name="release_year"
-            id="release_year"
-            placeholder="Enter Movie Release Year"
-            onChange={(e) => handleInputChange(e)}
-          ></input>
+        <div className="container">
+          <form onSubmit={(e) => handleAddMovie(e)}>
+            <label htmlFor="movie_name">Movie Name</label>
+            <input
+              type="text"
+              name="movie_name"
+              id="movie_name"
+              placeholder="Enter Movie Name"
+              onChange={(e) => handleInputChange(e)}
+            ></input>
+            <label htmlFor="movie_desc">Movie Description</label>
+            <input
+              type="text"
+              name="movie_desc"
+              id="movie_desc"
+              placeholder="Give a brief description of the movie"
+              onChange={(e) => handleInputChange(e)}
+            ></input>
+            <label htmlFor="release_year">Release Year</label>
+            <input
+              type="text"
+              name="release_year"
+              id="release_year"
+              placeholder="Enter Movie Release Year"
+              onChange={(e) => handleInputChange(e)}
+            ></input>
 
-          <div className="AddMovie-AddBtns">
-            <Link to="/" role="button" className="AddMovie-CancelBtn">
-              Back
-            </Link>
-            <button type="submit" className="AddMovieBtn">
-              Add Movie
-            </button>
-          </div>
+            <div className="AddMovie-AddBtns">
+              <Link to="/" role="button" className="AddMovie-CancelBtn">
+                Back
+              </Link>
+              <button type="submit" className="AddMovieBtn">
+                Add Movie
+              </button>
+            </div>
 
-          {showModal && (
-            <Modal errorMsg={showModalMsg} closeModal={toggleModal} />
-          )}
-        </form>
+            {showModal && (
+              <Modal errorMsg={showModalMsg} closeModal={toggleModal} />
+            )}
+          </form>
+        </div>
       </Layout>
     </>
   );

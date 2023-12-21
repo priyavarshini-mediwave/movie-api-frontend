@@ -267,6 +267,35 @@ body {
   justify-content: center;
   margin-top: 20px;
 }
+.sortBtns {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+.ASCBtn {
+  width: 105px;
+  height: 35px;
+  background-color: rgb(228, 224, 217);
+
+  /* background-color: whitesmoke; */
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.DESCBtn {
+  width: 105px;
+  height: 35px;
+  background-color: rgb(228, 224, 217);
+
+  /* background-color: whitesmoke; */
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
 @media (min-width: 768px) {
   .showMovies {
     grid-template-columns: 1fr;

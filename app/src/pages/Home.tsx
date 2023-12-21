@@ -91,16 +91,29 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
     const { value } = e.target;
     setSearch(value);
   };
+  //To Sort
+  const [sortMovie, setSortMovie] = useState("");
 
+  const handleSortAsc = () => {
+    setSortMovie("ASC");
+  };
+  const handleSortDesc = () => {
+    setSortMovie("DESC");
+  };
   //Get All Movies
   useEffect(() => {
     async function getMoviesFromAPI() {
       setIsLoading(true);
 
       try {
-        const response = await getMovies(currentPage, itemsPerPage, search);
+        const response = await getMovies(
+          currentPage,
+          itemsPerPage,
+          search,
+          sortMovie
+        );
         setMovies(response.data.movies);
-        console.log(response);
+        //console.log(response);
 
         const totalItems = response.data.totalItems;
         const calculatedTotalPages = Math.ceil(totalItems / itemsPerPage);
@@ -119,7 +132,7 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
       }
     }
     getMoviesFromAPI();
-  }, [currentPage, itemsPerPage, search]);
+  }, [currentPage, itemsPerPage, search, sortMovie]);
 
   // Show User Info
   async function handleUserModal() {
@@ -196,6 +209,14 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
                 ></input>
                 <button className="searchBtn"> 🔍</button>
               </label>
+              <div className="sortBtns">
+                <button className="ASCBtn" onClick={handleSortAsc}>
+                  A-Z ⬇️
+                </button>
+                <button className="DESCBtn" onClick={handleSortDesc}>
+                  Z-A ⬆️
+                </button>
+              </div>
             </div>
             <div className="showMovies grid">
               {movies.map((m, i) => (

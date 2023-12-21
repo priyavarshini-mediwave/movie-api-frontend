@@ -60,15 +60,19 @@ export const UpdateUser = (payload: IaddUser) => {
 export const getMovies = (
   page: number,
   itemsPerPage: number,
-  search: string
+  search: string,
+  sortMovie: string
 ) => {
-  return axiosInstance.get(`movies/list/?search=${search}`, {
-    ...setHeaders(),
-    params: {
-      page,
-      itemsPerPage,
-    },
-  });
+  return axiosInstance.get(
+    `movies/list/?search=${search}&sortMovie=${sortMovie}`,
+    {
+      ...setHeaders(),
+      params: {
+        page,
+        itemsPerPage,
+      },
+    }
+  );
 };
 export const addMovieApi = (payload: IMovie) => {
   return axiosInstance.post("/movies", payload, setHeaders());
