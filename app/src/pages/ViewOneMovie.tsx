@@ -67,6 +67,9 @@ const ViewOneMovie = () => {
             ))}
           </div>
         </div>
+        <div className="closeMovie">
+          <Link to="/">Close</Link>
+        </div>
       </div>
     </>
   );

@@ -67,7 +67,7 @@ const AddMovie = () => {
   return (
     <>
       <Layout title="Add new Movie">
-        <div className="container">
+        <div className="container AddMovie">
           <form onSubmit={(e) => handleAddMovie(e)}>
             <label htmlFor="movie_name">Movie Name</label>
             <input
