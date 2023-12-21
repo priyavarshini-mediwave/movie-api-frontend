@@ -57,8 +57,12 @@ export const UpdateUser = (payload: IaddUser) => {
 // export const getMovies = () => {
 //   return axiosInstance.get("/movies/list", setHeaders());
 // };
-export const getMovies = (page: number, itemsPerPage: number) => {
-  return axiosInstance.get("/movies/list", {
+export const getMovies = (
+  page: number,
+  itemsPerPage: number,
+  search: string
+) => {
+  return axiosInstance.get(`movies/list/?search=${search}`, {
     ...setHeaders(),
     params: {
       page,

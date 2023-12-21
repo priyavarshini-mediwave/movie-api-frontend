@@ -18,12 +18,14 @@ import christmas from "../assets/santa-dance-christmas-music.gif";
 import Modal from "../components/Modal";
 
 // Home Component starts here
+
 interface IHome {
   onEditAddfromHome: (u: IaddUser) => void;
 }
 
 const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   const navigate = useNavigate();
+
   //To Show Movies
   const [movies, setMovies] = useState<IMovietoshow[]>([]);
 
@@ -54,6 +56,9 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   const toggleUserModal = () => {
     setShowUserModal((prevShowUserModal) => !prevShowUserModal);
   };
+  const bringback = () => {
+    setShowUserModal(false);
+  };
 
   //ToEdit User
   const [showEdit, setshowEdit] = useState(false);
@@ -80,24 +85,26 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
     setCurrentPage(page);
   };
 
+  // To Search
+  const [search, setSearch] = useState("");
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearch(value);
+  };
+
+  //Get All Movies
   useEffect(() => {
     async function getMoviesFromAPI() {
       setIsLoading(true);
 
       try {
-        const response = await getMovies(currentPage, itemsPerPage);
+        const response = await getMovies(currentPage, itemsPerPage, search);
         setMovies(response.data.movies);
         console.log(response);
 
         const totalItems = response.data.totalItems;
         const calculatedTotalPages = Math.ceil(totalItems / itemsPerPage);
         setTotalPages(calculatedTotalPages || 1); // Ensure at least 1 page
-        console.log(
-          "calculatedTotalPages",
-          calculatedTotalPages,
-          "totalItems",
-          totalItems
-        );
       } catch (error) {
         if (error instanceof Error) {
           setShowModal(true);
@@ -112,8 +119,9 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
       }
     }
     getMoviesFromAPI();
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, search]);
 
+  // Show User Info
   async function handleUserModal() {
     try {
       const response = await viewUserInfo();
@@ -142,13 +150,13 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
       setIsLoading(false);
     }
   }
-  const bringback = () => {
-    setShowUserModal(false);
-  };
+
+  //To Logout
   const logout = () => {
     localStorage.clear();
     navigate("/login");
   };
+
   return (
     <>
       <Layout title="Home">
@@ -181,7 +189,11 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
               <img src={christmas} alt="santa"></img>
 
               <label htmlFor="search" className="search">
-                <input type="text" className="searchBar"></input>
+                <input
+                  type="text"
+                  className="searchBar"
+                  onChange={(e) => handleSearch(e)}
+                ></input>
                 <button className="searchBtn"> 🔍</button>
               </label>
             </div>
