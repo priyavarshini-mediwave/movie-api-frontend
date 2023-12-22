@@ -330,6 +330,10 @@ body {
   justify-content: center;
   margin-top: 20px;
 }
+.EditMovieForm {
+  background-color: white;
+  color: black;
+}
 @media (min-width: 768px) {
   .showMovies {
     grid-template-columns: 1fr;

@@ -34,15 +34,15 @@ interface IShowError {
 interface IMovie {
   movie_name: string;
   movie_desc: string;
-  release_year: number | undefined;
+  release_year: string;
 }
 interface IMovietoshow {
   movie_id: string;
   user_id: string;
   movie_name: string;
   movie_desc: string;
-  release_year: number | undefined;
-  rating: number;
+  release_year: string;
+  rating?: number;
 }
 interface IaddRatingPayload {
   rating_value: number;

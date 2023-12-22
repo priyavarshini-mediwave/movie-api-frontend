@@ -1,37 +1,119 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Modal from "../components/Modal";
-import { IShowError } from "../Interfaces/interfaces";
-//To Show Modal
-const [showModal, setShowModal] = useState(false);
-const [showModalMsg, setShowModalMsg] = useState<IShowError>({
-  action: "",
-  msg: "",
-});
+import { IMovie, IMovietoshow, IShowError } from "../Interfaces/interfaces";
+import { getOneMovieToUpdate, updateMovieApi } from "../services/api";
 
-const toggleModal = () => {
-  setShowModal((prevShowModal) => !prevShowModal);
-};
 const EditMovie = () => {
-  const [editMovie, setEditMovie] = useState({
+  //To Show Modal
+  const [showModal, setShowModal] = useState(false);
+  const [showModalMsg, setShowModalMsg] = useState<IShowError>({
+    action: "",
+    msg: "",
+  });
+
+  const toggleModal = () => {
+    setShowModal((prevShowModal) => !prevShowModal);
+  };
+  const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
+  console.log(id);
+  const [editMovie, setEditMovie] = useState<IMovietoshow>({
+    movie_id: "",
     movie_name: "",
     movie_desc: "",
-    release_year: 0,
+    release_year: "",
+    user_id: "",
   });
+  //console.log("editMovie", editMovie);
+  //console.log("typeof editMovie.release_year", typeof editMovie.release_year);
+  useEffect(() => {
+    async function getTheMovieToupdate() {
+      setIsLoading(true);
+      try {
+        const toUpdateMovie = await getOneMovieToUpdate(id || "");
+        if (toUpdateMovie) {
+          //console.log(typeof toUpdateMovie.data.release_year);
+          // console.log("toUpdateMovie", toUpdateMovie);
+          let year = toUpdateMovie.data.release_year;
+          let yearString = year.toString();
+          setEditMovie({
+            movie_id: toUpdateMovie.data.movie_id,
+            movie_name: toUpdateMovie.data.movie_name,
+            movie_desc: toUpdateMovie.data.movie_desc,
+            release_year: yearString,
+            user_id: toUpdateMovie.data.user_id,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getTheMovieToupdate();
+  }, [id]);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const updatedValue = name === "release_year" ? value.toString() : value;
+    setEditMovie({ ...editMovie, [name]: updatedValue });
+  };
+  const handleEditMovieSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleEditMovie();
+  };
+  async function handleEditMovie() {
+    // console.log(editMovie);
+    setIsLoading(true);
+    try {
+      const MovieEditPayload = {
+        movie_name: editMovie.movie_name,
+        movie_desc: editMovie.movie_desc,
+        release_year: editMovie.release_year,
+      };
+      {
+        isLoading ? <p>Loading</p> : <></>;
+      }
+      const UpdatedMovie = await updateMovieApi(MovieEditPayload, id || "");
+      if (UpdatedMovie) {
+        // toggleModal();
+        setShowModalMsg({
+          action: "Success",
+          msg: `Movie  "${MovieEditPayload.movie_name}" Edited Successfully`,
+        });
+        console.log("UpdatedMovie", UpdatedMovie);
+      }
+
+      //navigate("/");
+    } catch (error) {
+      console.log("Errored", error);
+      if (error instanceof Error) {
+        setShowModalMsg({
+          action: "failed",
+          msg: error.message,
+        });
+      }
+    } finally {
+      setIsLoading(false);
+      toggleModal();
+    }
+  }
 
   return (
     <>
-      <Layout title="EditMovie">
-        {/* <h1>EditMovie</h1>
-        <div className="container ">
-          <form>
+      <Layout title={`EditMovie-${editMovie.movie_name}`}>
+        <h1>EditMovie {editMovie.movie_name}</h1>
+
+        <div className="container EditMovieForm">
+          <form onSubmit={(e) => handleEditMovieSubmit(e)}>
             <label htmlFor="movie_name">Movie Name</label>
             <input
               type="text"
               name="movie_name"
               id="movie_name"
-              placeholder="Enter Movie Name"
+              placeholder="Change the movie name"
+              value={editMovie.movie_name}
               onChange={(e) => handleInputChange(e)}
             ></input>
             <label htmlFor="movie_desc">Movie Description</label>
@@ -39,7 +121,8 @@ const EditMovie = () => {
               type="text"
               name="movie_desc"
               id="movie_desc"
-              placeholder="Give a brief description of the movie"
+              placeholder="Change the brief description of the movie"
+              value={editMovie.movie_desc}
               onChange={(e) => handleInputChange(e)}
             ></input>
             <label htmlFor="release_year">Release Year</label>
@@ -47,7 +130,8 @@ const EditMovie = () => {
               type="text"
               name="release_year"
               id="release_year"
-              placeholder="Enter Movie Release Year"
+              placeholder="Change Movie Release Year"
+              value={editMovie.release_year}
               onChange={(e) => handleInputChange(e)}
             ></input>
 
@@ -56,7 +140,7 @@ const EditMovie = () => {
                 Back
               </Link>
               <button type="submit" className="EditMovieBtn">
-                Add Movie
+                Update
               </button>
             </div>
 
@@ -64,7 +148,7 @@ const EditMovie = () => {
               <Modal errorMsg={showModalMsg} closeModal={toggleModal} />
             )}
           </form>
-        </div> */}
+        </div>
       </Layout>
     </>
   );

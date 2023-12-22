@@ -80,6 +80,16 @@ export const addMovieApi = (payload: IMovie) => {
 export const getOneMovieApi = (movie_id: string) => {
   return axiosInstance.get(`/movies/list/${movie_id}`, setHeaders());
 };
+export const getOneMovieToUpdate = (movie_id: string) => {
+  return axiosInstance.get(`/movies/update/${movie_id}`, setHeaders());
+};
+export const updateMovieApi = (payload: IMovie, movie_id: string) => {
+  return axiosInstance.post(
+    `/movies/update/${movie_id}`,
+    payload,
+    setHeaders()
+  );
+};
 //Add Rating
 export const addRatingApi = (payload: IaddRatingPayload, movieId: string) => {
   return axiosInstance.post(`/movies/${movieId}/rating`, payload, setHeaders());

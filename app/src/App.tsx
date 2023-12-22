@@ -58,10 +58,7 @@ function App() {
             ></Route> */}
             <Route path="addMovie" element={<AddMovie />}></Route>
             <Route path="/movies/list/:id" element={<ViewOneMovie />} />
-            <Route
-              path="/movies/list/update/:id"
-              element={<EditMovie />}
-            ></Route>
+            <Route path="/movies/update/:id" element={<EditMovie />}></Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

@@ -18,7 +18,7 @@ const AddMovie = () => {
   const [addMovie, setAddMovie] = useState<IMovie>({
     movie_name: "",
     movie_desc: "",
-    release_year: 0,
+    release_year: "",
   });
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;

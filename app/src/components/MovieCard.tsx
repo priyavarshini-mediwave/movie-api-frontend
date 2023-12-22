@@ -70,7 +70,7 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
         <Link to={`/movies/list/${movie.movie_id}`} role="button">
           View Movie
         </Link>
-        <Link to={`/movies/list/update/${movie.movie_id}`} role="button">
+        <Link to={`/movies/update/${movie.movie_id}`} role="button">
           Update Movie
         </Link>
       </div>

@@ -123,7 +123,7 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
           setShowModal(true);
           console.log(error.message);
           setShowModalMsg({
-            action: "Unable to show movies",
+            action: "Unable to show movies or Login error",
             msg: error.message,
           });
         }
