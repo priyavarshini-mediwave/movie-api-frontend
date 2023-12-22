@@ -32,7 +32,7 @@ const UserModal: React.FC<IUserModal> = ({
         <p>Last_name:{userMsg.last_name}</p>
         <p>Email:{userMsg.email}</p>
         <p>User_name:{userMsg.user_name}</p>
-        <footer className="grid userModalBtns">
+        <footer className="userModalBtns">
           <Link
             to="/"
             role="button"
@@ -42,7 +42,15 @@ const UserModal: React.FC<IUserModal> = ({
           >
             Confirm
           </Link>
-          <button onClick={() => onEditAdd(userMsg)}>Update</button>
+          <Link
+            to="users/user/update"
+            role="button"
+            data-target="modal-example"
+            className="userModalEdit"
+          >
+            Update User
+          </Link>
+          {/* <button onClick={() => onEditAdd(userMsg)}>Update</button>  */}
           {/* <Link
             to="/editUser"
             role="button"

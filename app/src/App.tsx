@@ -9,6 +9,7 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const LoginForm = lazy(() => import("./pages/LoginForm"));
 
 import ProtectedRoute from "./services/ProtectedRoute";
+import EditUser from "./pages/EditUser";
 const EditMovie = lazy(() => import("./pages/EditMovie"));
 const AddMovie = lazy(() => import("./pages/AddMovie"));
 const ViewOneMovie = lazy(() => import("./pages/ViewOneMovie"));
@@ -56,6 +57,7 @@ function App() {
               path="/editUser"
               element={<EditUserForm userToUpdate={data} />}
             ></Route> */}
+            <Route path="/users/user/update" element={<EditUser />}></Route>
             <Route path="addMovie" element={<AddMovie />}></Route>
             <Route path="/movies/list/:id" element={<ViewOneMovie />} />
             <Route path="/movies/update/:id" element={<EditMovie />}></Route>

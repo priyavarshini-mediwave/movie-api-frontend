@@ -200,10 +200,16 @@ body {
   color: black;
 }
 .userModalBtns {
-  gap: 100px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 .userModalCancel {
-  width: 130px;
+  width: 160px;
+  height: 60px;
+}
+.userModalEdit {
+  width: 160px;
   height: 60px;
 }
 .pagination {
