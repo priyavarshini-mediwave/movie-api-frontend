@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { Link, useParams } from "react-router-dom";
 import Modal from "../components/Modal";
-import { IMovie, IMovietoshow, IShowError } from "../Interfaces/interfaces";
+import { IMovietoshow, IShowError } from "../Interfaces/interfaces";
 import { getOneMovieToUpdate, updateMovieApi } from "../services/api";
 
 const EditMovie = () => {
@@ -26,16 +26,13 @@ const EditMovie = () => {
     release_year: "",
     user_id: "",
   });
-  //console.log("editMovie", editMovie);
-  //console.log("typeof editMovie.release_year", typeof editMovie.release_year);
+
   useEffect(() => {
     async function getTheMovieToupdate() {
       setIsLoading(true);
       try {
         const toUpdateMovie = await getOneMovieToUpdate(id || "");
         if (toUpdateMovie) {
-          //console.log(typeof toUpdateMovie.data.release_year);
-          // console.log("toUpdateMovie", toUpdateMovie);
           let year = toUpdateMovie.data.release_year;
           let yearString = year.toString();
           setEditMovie({
@@ -64,7 +61,8 @@ const EditMovie = () => {
     handleEditMovie();
   };
   async function handleEditMovie() {
-    // console.log(editMovie);
+    let UpdatedMovie;
+
     setIsLoading(true);
     try {
       const MovieEditPayload = {
@@ -75,7 +73,8 @@ const EditMovie = () => {
       {
         isLoading ? <p>Loading</p> : <></>;
       }
-      const UpdatedMovie = await updateMovieApi(MovieEditPayload, id || "");
+      UpdatedMovie = await updateMovieApi(MovieEditPayload, id || "");
+
       if (UpdatedMovie) {
         // toggleModal();
         setShowModalMsg({
@@ -84,16 +83,12 @@ const EditMovie = () => {
         });
         console.log("UpdatedMovie", UpdatedMovie);
       }
-
-      //navigate("/");
-    } catch (error) {
+    } catch (error: any) {
       console.log("Errored", error);
-      if (error instanceof Error) {
-        setShowModalMsg({
-          action: "failed",
-          msg: error.message,
-        });
-      }
+      setShowModalMsg({
+        action: "Failed",
+        msg: error.response.data.message,
+      });
     } finally {
       setIsLoading(false);
       toggleModal();
