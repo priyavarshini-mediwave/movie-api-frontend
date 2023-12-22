@@ -98,9 +98,8 @@ const EditMovie = () => {
   return (
     <>
       <Layout title={`EditMovie-${editMovie.movie_name}`}>
-        <h1>EditMovie {editMovie.movie_name}</h1>
-
         <div className="container EditMovieForm">
+          <h1>EditMovie - {editMovie.movie_name}</h1>
           <form onSubmit={(e) => handleEditMovieSubmit(e)}>
             <label htmlFor="movie_name">Movie Name</label>
             <input

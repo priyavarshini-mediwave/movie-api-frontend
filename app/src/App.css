@@ -331,7 +331,28 @@ body {
   margin-top: 20px;
 }
 .EditMovieForm {
+  padding: 30px;
+  border-radius: 15px;
   background-color: white;
+  color: black;
+}
+.EditMovieForm label {
+  font-weight: bold;
+}
+.EditMovie-AddBtns {
+  display: flex;
+  justify-content: space-between;
+}
+.EditMovie-CancelBtn {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
+}
+.EditMovieBtn {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
   color: black;
 }
 @media (min-width: 768px) {
