@@ -386,6 +386,10 @@ body {
   background-color: #e4b721;
   color: black;
 }
+.ChangePassword {
+  background-color: #e88d48;
+  color: black;
+}
 @media (min-width: 768px) {
   .showMovies {
     grid-template-columns: 1fr;

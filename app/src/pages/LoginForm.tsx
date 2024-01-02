@@ -4,6 +4,7 @@ import { ILogin, IShowError } from "../Interfaces/interfaces";
 import Loading from "../components/Loading";
 import { loginUserapi } from "../services/api";
 import Modal from "../components/Modal";
+import Layout from "../components/Layout";
 const LoginForm: React.FC = () => {
   const [loginUser, setLoginUser] = useState<ILogin>({
     email: "",
@@ -29,7 +30,7 @@ const LoginForm: React.FC = () => {
     setConpass(value);
   }
   async function handleUserLogintoDb(loginUser: ILogin) {
-    //setIsLoading(true);
+    setIsLoading(true);
     if (conPass === loginUser.user_password) {
       try {
         const LoginPayload = {
@@ -51,20 +52,23 @@ const LoginForm: React.FC = () => {
         }
 
         //navigate("/");
-      } catch (error) {
+      } catch (error: any) {
         console.log("Errored", error);
-        if (error instanceof Error) {
-          setShowModalMsg({
-            action: "failed",
-            msg: error.message,
-          });
-        }
+        // if (error instanceof Error) {
+        setShowModalMsg({
+          action: "failed",
+          msg: error.response.data.message,
+        });
       } finally {
         setIsLoading(false);
         toggleModal();
       }
     } else {
-      setPassError({ ...passError, error: "password not match", show: true });
+      setPassError({
+        ...passError,
+        error: "Password does not match",
+        show: true,
+      });
     }
   }
 
@@ -79,57 +83,55 @@ const LoginForm: React.FC = () => {
 
   return (
     <>
-      <div className="LoginForm">
-        <form onSubmit={(e) => handleLogin(e)}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            placeholder="Enter your email"
-            onChange={(e) => handleInputChange(e)}
-          ></input>
-          <label htmlFor="user_password">Password</label>
-          <input
-            type="password"
-            name="user_password"
-            id="user_password"
-            placeholder="Enter your password"
-            onChange={(e) => handleInputChange(e)}
-          ></input>
-          <label htmlFor="confirm-password">
-            confirm-Password
+      <Layout title="Login Page">
+        <div className="LoginForm">
+          <form onSubmit={(e) => handleLogin(e)}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              onChange={(e) => handleInputChange(e)}
+            ></input>
+            <label htmlFor="user_password">Password</label>
             <input
               type="password"
-              id="confirm-password"
-              name="confirm-password"
-              placeholder="confirm Password"
-              onChange={handleconfirmPassword}
-              required
-            />
-            {passError.show && (
-              <p style={{ color: "red" }}>{passError.error}</p>
+              name="user_password"
+              id="user_password"
+              placeholder="Enter your password"
+              onChange={(e) => handleInputChange(e)}
+            ></input>
+            <label htmlFor="confirm-password">
+              confirm-Password
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="confirm Password"
+                onChange={handleconfirmPassword}
+                required
+              />
+              {passError.show && (
+                <p style={{ color: "red" }}>{passError.error}</p>
+              )}
+            </label>
+            <div className="User-form-input-AddFormbuttons"></div>
+            <div className="LoginBtns">
+              <button type="submit" className="LoginBtn">
+                Login
+              </button>
+              <p>-------Or-------</p>
+              <Link to="/SignUp" role="button" className="LoginFormSignUpBtn">
+                Create an Account
+              </Link>
+            </div>
+            {showModal && (
+              <Modal errorMsg={showModalMsg} closeModal={toggleModal} />
             )}
-          </label>
-          <div className="User-form-input-AddFormbuttons">
-            {/* <Link to="/" role="button" className="User-form-btn cancelBtn">
-              Back
-            </Link> */}
-          </div>
-          <div className="LoginBtns">
-            <button type="submit" className="LoginBtn">
-              Login
-            </button>
-            <p>-------Or-------</p>
-            <Link to="/SignUp" role="button" className="LoginFormSignUpBtn">
-              Create an Account
-            </Link>
-          </div>
-          {showModal && (
-            <Modal errorMsg={showModalMsg} closeModal={toggleModal} />
-          )}
-        </form>
-      </div>
+          </form>
+        </div>
+      </Layout>
     </>
   );
 };

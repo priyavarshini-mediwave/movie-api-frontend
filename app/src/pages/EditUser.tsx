@@ -32,7 +32,6 @@ const EditUser = () => {
       try {
         const userToEdit = await viewUserInfo();
         if (userToEdit) {
-          console.log(userToEdit);
           setEditUser(userToEdit.data);
         }
       } catch (error) {
@@ -145,6 +144,15 @@ const EditUser = () => {
               </button>
             </div>
 
+            <div>
+              <Link
+                to="/users/user/updatePassword"
+                role="button"
+                className="ChangePassword"
+              >
+                Change Password
+              </Link>
+            </div>
             {showModal && (
               <Modal errorMsg={showModalMsg} closeModal={toggleModal} />
             )}

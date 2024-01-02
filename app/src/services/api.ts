@@ -5,6 +5,7 @@ import {
   IaddUser,
   IaddRatingPayload,
   IUserUpdate,
+  IPasswordUpdate,
 } from "../Interfaces/interfaces";
 //import { IMovieAdd } from "../Interfaces/Interface";
 const axiosInstance = axios.create({
@@ -38,10 +39,17 @@ export const viewUserInfo = () => {
 export const UpdateUser = (payload: IUserUpdate) => {
   return axiosInstance.patch("/users/user/updateUser", payload, setHeaders());
 };
+
+export const updatePasswordApi = (payload: IPasswordUpdate) => {
+  return axiosInstance.patch(
+    "/users/user/updatePassword",
+    payload,
+    setHeaders()
+  );
+};
+
 //Movie Routes
-// export const getMovies = () => {
-//   return axiosInstance.get("/movies/list", setHeaders());
-// };
+
 export const getMovies = (
   page: number,
   itemsPerPage: number,

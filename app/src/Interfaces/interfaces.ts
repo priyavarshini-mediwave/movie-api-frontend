@@ -33,6 +33,10 @@ interface IUserUpdate {
   user_name: string;
   phone_no: string;
 }
+interface IPasswordUpdate {
+  old_password: string;
+  new_password: string;
+}
 interface IShowError {
   action: string;
   msg: string;
@@ -53,6 +57,7 @@ interface IMovietoshow {
 interface IaddRatingPayload {
   rating_value: number;
 }
+
 export type {
   ILayout,
   IUserForm,
@@ -64,4 +69,5 @@ export type {
   IuserInfo,
   IaddRatingPayload,
   IUserUpdate,
+  IPasswordUpdate,
 };

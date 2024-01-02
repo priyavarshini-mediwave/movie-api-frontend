@@ -10,9 +10,11 @@ const LoginForm = lazy(() => import("./pages/LoginForm"));
 
 import ProtectedRoute from "./services/ProtectedRoute";
 import EditUser from "./pages/EditUser";
+
 const EditMovie = lazy(() => import("./pages/EditMovie"));
 const AddMovie = lazy(() => import("./pages/AddMovie"));
 const ViewOneMovie = lazy(() => import("./pages/ViewOneMovie"));
+const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
 function Loading() {
   return <p>Loading ...</p>;
 }
@@ -33,14 +35,15 @@ function App() {
             />
             <Route path="/SignUp" element={<AddUserForm />}></Route>
             <Route path="/login" element={<LoginForm />}></Route>
-            {/* <Route
-              path="/editUser"
-              element={<EditUserForm userToUpdate={data} />}
-            ></Route> */}
+
             <Route path="/users/user/update" element={<EditUser />}></Route>
             <Route path="addMovie" element={<AddMovie />}></Route>
             <Route path="/movies/list/:id" element={<ViewOneMovie />} />
             <Route path="/movies/update/:id" element={<EditMovie />}></Route>
+            <Route
+              path="/users/user/updatePassword"
+              element={<UpdatePassword />}
+            ></Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
