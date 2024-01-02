@@ -5,19 +5,13 @@ interface IUserModal {
   userMsg: IaddUser;
   closeModal: () => void;
   navigateToHome?: () => void;
-  onEditAdd: (userMsg: IaddUser) => void;
 }
 
 const UserModal: React.FC<IUserModal> = ({
   userMsg,
   closeModal,
   navigateToHome,
-  onEditAdd,
 }) => {
-  // function handleDatatoEdit(userMsg: IaddUser) {
-  //   console.log("ToEditUser", userMsg);
-  //   onEditAdd(userMsg);
-  // }
   return (
     <dialog open>
       <article>

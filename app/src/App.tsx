@@ -1,7 +1,7 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense } from "react";
 import "@picocss/pico";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { IaddUser } from "./Interfaces/interfaces";
+
 import "./App.css";
 import Home from "./pages/Home";
 const AddUserForm = lazy(() => import("./pages/AddUserForm"));
@@ -17,21 +17,6 @@ function Loading() {
   return <p>Loading ...</p>;
 }
 function App() {
-  const [data, setData] = useState<IaddUser>({
-    first_name: "",
-    last_name: "",
-    email: "",
-    user_name: "",
-    user_password: "",
-    phone_no: "",
-  });
-
-  function onAddToApp(dataFromHome: IaddUser) {
-    console.log("dataToApp", data);
-    setData(dataFromHome);
-    console.log("datatoEditForm", data);
-  }
-
   return (
     <>
       <Suspense fallback={<Loading />}>
@@ -42,12 +27,7 @@ function App() {
               path="/"
               element={
                 <ProtectedRoute>
-                  <Home
-                    onEditAddfromHome={(dataFromHome) => {
-                      //console.log("dataFromHome", dataFromHome);
-                      onAddToApp(dataFromHome);
-                    }}
-                  />
+                  <Home />
                 </ProtectedRoute>
               }
             />

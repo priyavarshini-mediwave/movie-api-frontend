@@ -46,8 +46,6 @@ const LoginForm: React.FC = () => {
           //   msg: `Login Successful!`,
           // });
           let token = userLoggedIn.data.created_token;
-          console.log("userLoggedIn", userLoggedIn);
-          console.log(token);
           localStorage.setItem("token", token);
           navigate("/");
         }

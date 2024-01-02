@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IMovietoshow, IShowError } from "../Interfaces/interfaces";
 import Modal from "./Modal";
 import Rating from "@mui/material/Rating";

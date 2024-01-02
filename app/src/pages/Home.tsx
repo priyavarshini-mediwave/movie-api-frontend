@@ -19,11 +19,7 @@ import Modal from "../components/Modal";
 
 // Home Component starts here
 
-interface IHome {
-  onEditAddfromHome: (u: IaddUser) => void;
-}
-
-const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
+const Home = () => {
   const navigate = useNavigate();
 
   //To Show Movies
@@ -61,20 +57,6 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
   };
 
   //ToEdit User
-  const [showEdit, setshowEdit] = useState(false);
-  const [userData, setUserData] = useState<any>();
-
-  function onAddtoHome(data: IaddUser) {
-    console.log(data);
-    setUserData(data);
-  }
-
-  useEffect(() => {
-    console.log("userData:", userData);
-    onEditAddfromHome(userData);
-  }, [userData]);
-  // console.log("showEdit", showEdit);
-  // showEdit ? navigate("/editUser") : navigate("/");
 
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -251,10 +233,6 @@ const Home: React.FC<IHome> = ({ onEditAddfromHome }) => {
           userMsg={showUserModalMsg}
           closeModal={toggleUserModal}
           navigateToHome={bringback}
-          onEditAdd={(data) => {
-            console.log("funcDAta", data);
-            onAddtoHome(data);
-          }}
         />
       )}
       {showModal && <Modal errorMsg={showModalMsg} closeModal={toggleModal} />}
