@@ -95,9 +95,12 @@ const updatePassword = () => {
 
   return (
     <>
-      <h1>Update Password</h1>
       <Layout title="Update User Password">
-        <form onSubmit={(e) => handlePasswordFormSubmit(e)}>
+        <form
+          onSubmit={(e) => handlePasswordFormSubmit(e)}
+          className="updatePwdForm"
+        >
+          <h1>Update Password</h1>
           <label htmlFor="old_password">Old Password</label>
           <input
             type="password"
@@ -130,7 +133,7 @@ const updatePassword = () => {
               <p style={{ color: "red" }}>{passError.error}</p>
             )}
           </label>
-          <div className="UpdatePasswordBtns"></div>
+
           <div className="changePasswordBtns">
             <Link to="/" role="button" className="changePasswordCancelButton">
               Cancel

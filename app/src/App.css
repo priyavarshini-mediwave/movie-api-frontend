@@ -41,9 +41,8 @@
   color: #888;
 } */
 #root {
-  margin: 50px;
   background-color: black;
-  padding: 40px;
+  min-height: 100vh;
 }
 body {
   background-color: black;
@@ -145,8 +144,6 @@ body {
   text-align: center;
 }
 .moviecards {
-  width: 400px;
-  height: 500px;
   margin: 20px;
   padding: 25px;
   border-radius: 15px;
@@ -389,6 +386,50 @@ body {
 .ChangePassword {
   background-color: #e88d48;
   color: black;
+}
+.updatePwdForm {
+  margin: 20px;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: white;
+  color: black;
+}
+.updatePwdForm label {
+  font-weight: bold;
+}
+.changePasswordBtns {
+  display: flex;
+  justify-content: space-between;
+}
+.changePasswordCancelButton {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
+}
+.changePassword {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
+}
+@media (min-width: 320px) {
+  .showMovies {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+@media (min-width: 480px) {
+  .showMovies {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+@media (min-width: 570px) {
+  .showMovies {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 @media (min-width: 768px) {
   .showMovies {

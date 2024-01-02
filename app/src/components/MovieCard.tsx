@@ -60,6 +60,7 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
   }, [rating_value]);
   return (
     <>
+      <div className="movieCard"></div>
       <h3>{movie.movie_name}</h3>
 
       <p className="movie_desc"> {movie.movie_desc}</p>

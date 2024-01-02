@@ -158,7 +158,7 @@ const Home = () => {
         {isLoading ? (
           <p>Loading Movies..</p>
         ) : (
-          <article className="container" data-theme="dark">
+          <article className="container Home" data-theme="dark">
             <div className="HomeName grid">
               <div>
                 <div className="iMDB">
