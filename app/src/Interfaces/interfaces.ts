@@ -26,7 +26,13 @@ interface IuserInfo {
   email: string;
   user_name: string;
 }
-
+interface IUserUpdate {
+  first_name: string;
+  last_name: string;
+  email: string;
+  user_name: string;
+  phone_no: string;
+}
 interface IShowError {
   action: string;
   msg: string;
@@ -57,4 +63,5 @@ export type {
   IMovietoshow,
   IuserInfo,
   IaddRatingPayload,
+  IUserUpdate,
 };

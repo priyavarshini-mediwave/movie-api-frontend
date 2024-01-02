@@ -18,7 +18,7 @@ const EditMovie = () => {
   };
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-  console.log(id);
+  //console.log(id);
   const [editMovie, setEditMovie] = useState<IMovietoshow>({
     movie_id: "",
     movie_name: "",

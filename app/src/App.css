@@ -361,6 +361,31 @@ body {
   background-color: #e4b721;
   color: black;
 }
+.EditUserForm {
+  padding: 30px;
+  border-radius: 15px;
+  background-color: white;
+  color: black;
+}
+.EditUserForm label {
+  font-weight: bold;
+}
+.EditUser-AddBtns {
+  display: flex;
+  justify-content: space-between;
+}
+.EditUser-CancelBtn {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
+}
+.EditUserBtn {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
+}
 @media (min-width: 768px) {
   .showMovies {
     grid-template-columns: 1fr;
