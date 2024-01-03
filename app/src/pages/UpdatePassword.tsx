@@ -120,7 +120,7 @@ const updatePassword = () => {
             required
           ></input>
           <label htmlFor="confirm-password">
-            confirm-Password
+            Confirm-Password
             <input
               type="password"
               id="confirm-password"
@@ -135,7 +135,11 @@ const updatePassword = () => {
           </label>
 
           <div className="changePasswordBtns">
-            <Link to="/" role="button" className="changePasswordCancelButton">
+            <Link
+              to="/users/user/update"
+              role="button"
+              className="changePasswordCancelButton"
+            >
               Cancel
             </Link>
             <button type="submit" className="changePassword">
