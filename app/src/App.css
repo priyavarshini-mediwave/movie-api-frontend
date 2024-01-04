@@ -125,6 +125,19 @@ body {
   background-color: #e4b721;
   color: black;
 }
+.deleteMovieDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.DeleteMovieBtn {
+  margin-top: 10px;
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
+}
 .AddRatingBtn {
   display: flex;
   justify-content: center;

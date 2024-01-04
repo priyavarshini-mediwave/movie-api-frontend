@@ -83,6 +83,9 @@ export const updateMovieApi = (payload: IMovie, movie_id: string) => {
     setHeaders()
   );
 };
+export const deleteMovieApi = (movie_id: string) => {
+  return axiosInstance.delete(`/movies/delete/${movie_id}`, setHeaders());
+};
 //Add Rating
 export const addRatingApi = (payload: IaddRatingPayload, movieId: string) => {
   return axiosInstance.post(`/movies/${movieId}/rating`, payload, setHeaders());

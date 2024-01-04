@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { lazy, useEffect, useState } from "react";
+import Rating from "@mui/material/Rating";
+
 import { IMovietoshow, IShowError } from "../Interfaces/interfaces";
 import Modal from "./Modal";
-import Rating from "@mui/material/Rating";
-import { useEffect, useState } from "react";
-import { addRatingApi } from "../services/api";
+const Loading = lazy(() => import("./Loading"));
+
+import { addRatingApi, deleteMovieApi } from "../services/api";
 
 interface IMovieCard {
   movie: IMovietoshow;
@@ -22,6 +25,7 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
   const toggleModal = () => {
     setShowModal((prevShowModal) => !prevShowModal);
   };
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [rating_value, setRatingValue] = useState(0);
 
@@ -58,6 +62,37 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
     }
     addRating();
   }, [rating_value]);
+  const handleDeleteMovie = (movie_id: string) => {
+    console.log("movie_id", movie_id);
+    handleDelete(movie_id);
+  };
+  async function handleDelete(movie_id: string) {
+    try {
+      setIsLoading(true);
+      {
+        isLoading ? <Loading /> : <></>;
+      }
+      const deletedMovie = await deleteMovieApi(movie_id);
+      console.log("deletedMovie", deletedMovie);
+      location.reload();
+      // if (deletedMovie) {
+      //   setShowModalMsg({
+      //     action: "Success",
+      //     msg: `Movie ${movie.movie_name} deleted Successfully`,
+      //   });
+      // }
+      // navigate("/");
+    } catch (error: any) {
+      console.log(error);
+      setShowModalMsg({
+        action: "failed",
+        msg: error.response.data.message,
+      });
+    } finally {
+      setIsLoading(false);
+      toggleModal();
+    }
+  }
   return (
     <>
       <div className="movieCard"></div>
@@ -74,6 +109,14 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
         <Link to={`/movies/update/${movie.movie_id}`} role="button">
           Update Movie
         </Link>
+      </div>
+      <div className="deleteMovieDiv">
+        <button
+          className="DeleteMovieBtn"
+          onClick={() => handleDeleteMovie(movie.movie_id)}
+        >
+          Delete
+        </button>
       </div>
       <div className="Rating">
         <p>Rate the movie here:</p>

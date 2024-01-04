@@ -71,8 +71,11 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    // let searchValue=value;
+
     setSearch(value);
   };
+
   //To Sort
   const [sortMovie, setSortMovie] = useState("");
 
@@ -187,9 +190,10 @@ const Home = () => {
                 <input
                   type="text"
                   className="searchBar"
+                  value={search}
                   onChange={(e) => handleSearch(e)}
                 ></input>
-                <button className="searchBtn"> 🔍</button>
+                <button className="searchBtn">🔍</button>
               </label>
               <div className="sortBtns">
                 <button className="ASCBtn" onClick={handleSortAsc}>
