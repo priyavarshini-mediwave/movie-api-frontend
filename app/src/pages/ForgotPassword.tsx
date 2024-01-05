@@ -1,9 +1,19 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
-import OtpValidation from "./OtpValidation";
+import Modal from "../components/Modal";
 import { sendOtpApi } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { IShowError } from "../Interfaces/interfaces";
 const FogotPassword = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [showModalMsg, setShowModalMsg] = useState<IShowError>({
+    action: "",
+    msg: "",
+  });
+  const toggleModal = () => {
+    setShowModal((prevShowModal) => !prevShowModal);
+  };
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
@@ -29,8 +39,14 @@ const FogotPassword = () => {
         navigate(`/users/otp-validation/${Navuser_id}`);
         setEmail("");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setShowModal(true);
+      console.log(error.message);
+      setShowModalMsg({
+        action: "Unable to send mail",
+        msg: error.response.data.message,
+      });
     }
   }
   return (
@@ -48,10 +64,16 @@ const FogotPassword = () => {
               required
             ></input>
             <div className="forgotPwdSubmitDiv">
+              <Link to="/login" role="button" className="cancelBtn">
+                Back
+              </Link>
               <button type="submit" className="forgotPwdSubmit">
                 Send Otp
               </button>
             </div>
+            {showModal && (
+              <Modal errorMsg={showModalMsg} closeModal={toggleModal} />
+            )}
           </form>
         </div>
       </Layout>

@@ -63,6 +63,9 @@ interface ISendOtpPayload {
 interface IOtpVerify {
   otp: number;
 }
+interface IchangePwd {
+  user_password: string;
+}
 export type {
   ILayout,
   IUserForm,
@@ -77,4 +80,5 @@ export type {
   IPasswordUpdate,
   ISendOtpPayload,
   IOtpVerify,
+  IchangePwd,
 };

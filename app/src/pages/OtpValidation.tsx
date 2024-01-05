@@ -1,9 +1,20 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+
 import Layout from "../components/Layout";
+import Modal from "../components/Modal";
+import { IShowError } from "../Interfaces/interfaces";
 import { useState } from "react";
 import { verifyOTPApi } from "../services/api";
 
 const OtpValidation = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [showModalMsg, setShowModalMsg] = useState<IShowError>({
+    action: "",
+    msg: "",
+  });
+  const toggleModal = () => {
+    setShowModal((prevShowModal) => !prevShowModal);
+  };
   const navigate = useNavigate();
   const [otp, setOtp] = useState(0);
   const { user_id } = useParams();
@@ -28,8 +39,14 @@ const OtpValidation = () => {
         navigate(`/users/forgot-passwordChange/${user_id}`);
         setOtp(0);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setShowModal(true);
+      console.log(error.message);
+      setShowModalMsg({
+        action: "Unable to send mail",
+        msg: error.response.data.message,
+      });
     }
   }
   return (
@@ -53,11 +70,17 @@ const OtpValidation = () => {
               required
               onChange={(e) => handleInputChange(e)}
             ></input>
-            <div className="otpsubmitBtnDiv">
+            <div className="otpsubmitBtnsDiv">
+              <Link to="/login" role="button" className="cancelBtn">
+                Back
+              </Link>
               <button type="submit" className="otpValueSubmitBtn">
                 Submit
               </button>
             </div>
+            {showModal && (
+              <Modal errorMsg={showModalMsg} closeModal={toggleModal} />
+            )}
           </form>
         </div>
       </Layout>

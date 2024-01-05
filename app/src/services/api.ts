@@ -8,6 +8,7 @@ import {
   IPasswordUpdate,
   ISendOtpPayload,
   IOtpVerify,
+  IchangePwd,
 } from "../Interfaces/interfaces";
 //import { IMovieAdd } from "../Interfaces/Interface";
 const axiosInstance = axios.create({
@@ -40,6 +41,12 @@ export const sendOtpApi = (payload: ISendOtpPayload) => {
 };
 export const verifyOTPApi = (payload: IOtpVerify, user_id: string) => {
   return axiosInstance.post(`/users/otp-validation/${user_id}`, payload);
+};
+export const changePwdApi = (payload: IchangePwd, user_id: string) => {
+  return axiosInstance.patch(
+    `/users/forgot-passwordChange/${user_id}`,
+    payload
+  );
 };
 export const viewUserInfo = () => {
   return axiosInstance.get("/users/userInfo", setHeaders());

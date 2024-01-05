@@ -412,7 +412,7 @@ body {
 }
 .forgotPwdSubmitDiv {
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
 }
 .forgotPwdSubmit {
   width: 160px;
@@ -438,9 +438,15 @@ body {
   background-color: #f6f4f2;
   /* background-color: #f5efd9; */
 }
-.otpsubmitBtnDiv {
+.otpsubmitBtnsDiv {
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
+}
+.cancelBtn {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
 }
 .otpValueSubmitBtn {
   width: 160px;
