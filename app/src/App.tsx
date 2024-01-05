@@ -12,9 +12,10 @@ const AddUserForm = lazy(() => import("./pages/AddUserForm"));
 const LoginForm = lazy(() => import("./pages/LoginForm"));
 const EditUser = lazy(() => import("./pages/EditUser"));
 const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const OtpValidation = lazy(() => import("./pages/OtpValidation"));
 
 const AddMovie = lazy(() => import("./pages/AddMovie"));
-const DeleteMovie = lazy(() => import("./pages/DeleteMovie"));
 const EditMovie = lazy(() => import("./pages/EditMovie"));
 const ViewOneMovie = lazy(() => import("./pages/ViewOneMovie"));
 
@@ -43,14 +44,18 @@ function App() {
               path="/users/user/updatePassword"
               element={<UpdatePassword />}
             ></Route>
+            <Route
+              path="/users/send-otp-mail"
+              element={<ForgotPassword />}
+            ></Route>
+            <Route
+              path="/users/otp-validation/user_id"
+              element={<OtpValidation />}
+            ></Route>
 
             <Route path="addMovie" element={<AddMovie />}></Route>
             <Route path="/movies/list/:id" element={<ViewOneMovie />} />
             <Route path="/movies/update/:id" element={<EditMovie />}></Route>
-            <Route
-              path="/movies/delete/:movie_id"
-              element={<DeleteMovie />}
-            ></Route>
 
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

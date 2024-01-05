@@ -103,7 +103,7 @@ const LoginForm: React.FC = () => {
               onChange={(e) => handleInputChange(e)}
             ></input>
             <label htmlFor="confirm-password">
-              confirm-Password
+              Confirm-Password
               <input
                 type="password"
                 id="confirm-password"
@@ -116,6 +116,11 @@ const LoginForm: React.FC = () => {
                 <p style={{ color: "red" }}>{passError.error}</p>
               )}
             </label>
+            <div className="forgotPwdDiv">
+              <Link to="/users/send-otp-mail" className="forgotPwdBtn">
+                Forgot Password
+              </Link>
+            </div>
             <div className="User-form-input-AddFormbuttons"></div>
             <div className="LoginBtns">
               <button type="submit" className="LoginBtn">

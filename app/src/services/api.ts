@@ -6,6 +6,7 @@ import {
   IaddRatingPayload,
   IUserUpdate,
   IPasswordUpdate,
+  ISendOtpPayload,
 } from "../Interfaces/interfaces";
 //import { IMovieAdd } from "../Interfaces/Interface";
 const axiosInstance = axios.create({
@@ -32,6 +33,9 @@ export const addUser = (payload: IaddUser) => {
 };
 export const loginUserapi = (payload: ILogin) => {
   return axiosInstance.post("/login", payload);
+};
+export const sendOtpApi = (payload: ISendOtpPayload) => {
+  return axiosInstance.post("/users/send-otp-mail", payload);
 };
 export const viewUserInfo = () => {
   return axiosInstance.get("/users/userInfo", setHeaders());

@@ -8,10 +8,8 @@ interface IProtectedRoute {
 }
 
 const ProtectedRoute: React.FC<IProtectedRoute> = ({ children }) => {
-  // const user = useSelector((state) => state.user);
-  // let location = useLocation();
   let user_token = localStorage.getItem("token");
-  console.log(user_token);
+  //console.log(user_token);
   return user_token ? children : Navigate({ to: "/login", replace: true });
   // if (!user_token) {
   //   return <Navigate>

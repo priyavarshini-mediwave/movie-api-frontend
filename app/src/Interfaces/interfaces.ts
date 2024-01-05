@@ -57,7 +57,9 @@ interface IMovietoshow {
 interface IaddRatingPayload {
   rating_value: number;
 }
-
+interface ISendOtpPayload {
+  email: string;
+}
 export type {
   ILayout,
   IUserForm,
@@ -70,4 +72,5 @@ export type {
   IaddRatingPayload,
   IUserUpdate,
   IPasswordUpdate,
+  ISendOtpPayload,
 };

@@ -21,13 +21,13 @@ const UserForm: React.FC<IUserForm> = ({
     }
   );
 
-  console.log("Say user:", user);
+  //console.log("Say user:", user);
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   }
-  console.log("Say user:", user);
+  //console.log("Say user:", user);
   function handleAdd(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     //setnewLoading(true);

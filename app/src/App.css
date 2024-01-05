@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap");
+
 #root {
   background-color: black;
   min-height: 100vh;
@@ -5,6 +7,7 @@
 }
 body {
   background-color: black;
+  font-family: "Raleway", sans-serif;
 }
 .Not-found h1 {
   color: #ffffff;
@@ -282,7 +285,7 @@ body {
   padding: 20px;
 }
 .ASCBtn {
-  width: 105px;
+  width: 108px;
   height: 35px;
   background-color: rgb(228, 224, 217);
 
@@ -294,7 +297,7 @@ body {
   margin-top: 20px;
 }
 .DESCBtn {
-  width: 105px;
+  width: 108px;
   height: 35px;
   background-color: rgb(228, 224, 217);
 
@@ -380,6 +383,38 @@ body {
   color: black;
 }
 .changePassword {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
+}
+
+.forgotPwdDiv {
+  text-align: right;
+}
+.forgotPwdBtn {
+  color: red;
+  font-size: large;
+  font-weight: 600;
+}
+
+.forgotPwdForm {
+  padding: 20px;
+  margin: auto;
+  max-width: 800px;
+  margin-top: 30px;
+  border-radius: 15px;
+  background-color: #f1eee5;
+}
+.forgotPwdForm label {
+  font-size: large;
+  font-weight: bold;
+}
+.forgotPwdSubmitDiv {
+  display: flex;
+  justify-content: right;
+}
+.forgotPwdSubmit {
   width: 160px;
   height: 60px;
   background-color: #e4b721;

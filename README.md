@@ -14,13 +14,17 @@
 
     User
         * Create a account- SignUp
-        * Login
+        * Login using email and password
         * View User Details
+        * Update User Details
+        * Update Password
+        * Logout
     Movies
         * Add a Movie
-        * Show all Movies with Overall Rating,search
+        * Show all Movies with Overall Rating , Search and Sort Optiond
         * View Details of a movie - with Added by and Rating Details
         * Add Rating
+        * Update and Delete movie options for the user who added the movie
 
 ##### Pagination and Rating with Material UI
 
