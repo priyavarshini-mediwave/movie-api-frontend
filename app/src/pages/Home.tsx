@@ -86,36 +86,36 @@ const Home = () => {
     setSortMovie("DESC");
   };
   //Get All Movies
-  useEffect(() => {
-    async function getMoviesFromAPI() {
-      setIsLoading(true);
+  async function getMoviesFromAPI() {
+    setIsLoading(true);
 
-      try {
-        const response = await getMovies(
-          currentPage,
-          itemsPerPage,
-          search,
-          sortMovie
-        );
-        setMovies(response.data.movies);
-        //console.log(response);
+    try {
+      const response = await getMovies(
+        currentPage,
+        itemsPerPage,
+        search,
+        sortMovie
+      );
+      setMovies(response.data.movies);
+      //console.log(response);
 
-        const totalItems = response.data.totalItems;
-        const calculatedTotalPages = Math.ceil(totalItems / itemsPerPage);
-        setTotalPages(calculatedTotalPages || 1); // Ensure at least 1 page
-      } catch (error) {
-        if (error instanceof Error) {
-          setShowModal(true);
-          console.log(error.message);
-          setShowModalMsg({
-            action: "Unable to show movies or Login error",
-            msg: error.message,
-          });
-        }
-      } finally {
-        setIsLoading(false);
+      const totalItems = response.data.totalItems;
+      const calculatedTotalPages = Math.ceil(totalItems / itemsPerPage);
+      setTotalPages(calculatedTotalPages || 1); // Ensure at least 1 page
+    } catch (error) {
+      if (error instanceof Error) {
+        setShowModal(true);
+        console.log(error.message);
+        setShowModalMsg({
+          action: "Unable to show movies or Login error",
+          msg: error.message,
+        });
       }
+    } finally {
+      setIsLoading(false);
     }
+  }
+  useEffect(() => {
     getMoviesFromAPI();
   }, [currentPage, itemsPerPage, search, sortMovie]);
 
