@@ -420,6 +420,35 @@ body {
   background-color: #e4b721;
   color: black;
 }
+.otpValidationDiv {
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+.otpValidationDiv p {
+  font-size: large;
+  font-weight: bold;
+}
+.otpValidForm {
+  margin: auto;
+  max-width: 600px;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 15px;
+  background-color: #f6f4f2;
+  /* background-color: #f5efd9; */
+}
+.otpsubmitBtnDiv {
+  display: flex;
+  justify-content: right;
+}
+.otpValueSubmitBtn {
+  width: 160px;
+  height: 60px;
+  background-color: #e4b721;
+  color: black;
+}
+
 @media (min-width: 320px) {
   .showMovies {
     grid-template-columns: 1fr;

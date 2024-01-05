@@ -14,6 +14,7 @@ const EditUser = lazy(() => import("./pages/EditUser"));
 const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const OtpValidation = lazy(() => import("./pages/OtpValidation"));
+const ForgotPasswordUpdate = lazy(() => import("./pages/ForgotPasswordUpdate"));
 
 const AddMovie = lazy(() => import("./pages/AddMovie"));
 const EditMovie = lazy(() => import("./pages/EditMovie"));
@@ -49,8 +50,12 @@ function App() {
               element={<ForgotPassword />}
             ></Route>
             <Route
-              path="/users/otp-validation/user_id"
+              path="/users/otp-validation/:user_id"
               element={<OtpValidation />}
+            ></Route>
+            <Route
+              path="/users/forgot-passwordChange/:user_id"
+              element={<ForgotPasswordUpdate />}
             ></Route>
 
             <Route path="addMovie" element={<AddMovie />}></Route>

@@ -7,6 +7,7 @@ import {
   IUserUpdate,
   IPasswordUpdate,
   ISendOtpPayload,
+  IOtpVerify,
 } from "../Interfaces/interfaces";
 //import { IMovieAdd } from "../Interfaces/Interface";
 const axiosInstance = axios.create({
@@ -36,6 +37,9 @@ export const loginUserapi = (payload: ILogin) => {
 };
 export const sendOtpApi = (payload: ISendOtpPayload) => {
   return axiosInstance.post("/users/send-otp-mail", payload);
+};
+export const verifyOTPApi = (payload: IOtpVerify, user_id: string) => {
+  return axiosInstance.post(`/users/otp-validation/${user_id}`, payload);
 };
 export const viewUserInfo = () => {
   return axiosInstance.get("/users/userInfo", setHeaders());

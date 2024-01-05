@@ -45,6 +45,7 @@ const FogotPassword = () => {
               id="email"
               placeholder="Enter your registered email to get the verification Otp"
               onChange={(e) => handleInputChange(e)}
+              required
             ></input>
             <div className="forgotPwdSubmitDiv">
               <button type="submit" className="forgotPwdSubmit">

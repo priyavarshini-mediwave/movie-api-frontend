@@ -60,6 +60,9 @@ interface IaddRatingPayload {
 interface ISendOtpPayload {
   email: string;
 }
+interface IOtpVerify {
+  otp: number;
+}
 export type {
   ILayout,
   IUserForm,
@@ -73,4 +76,5 @@ export type {
   IUserUpdate,
   IPasswordUpdate,
   ISendOtpPayload,
+  IOtpVerify,
 };
