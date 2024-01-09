@@ -67,6 +67,8 @@ body {
 }
 .AddUserBtn {
   width: 160px;
+  background-color: #e4b721;
+  color: black;
 }
 .cancelBtn {
   width: 160px;
@@ -455,7 +457,14 @@ body {
   background-color: #e4b721;
   color: black;
 }
-
+.changePwdForm {
+  margin: auto;
+  max-width: 600px;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 15px;
+  background-color: #f6f4f2;
+}
 @media (min-width: 320px) {
   .showMovies {
     grid-template-columns: 1fr;

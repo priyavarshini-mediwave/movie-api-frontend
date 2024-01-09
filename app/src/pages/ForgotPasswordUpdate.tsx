@@ -81,17 +81,17 @@ const ForgotPasswordUpdate = () => {
     } catch (error: any) {
       console.log(error);
       setShowModalMsg({
-        action: "failed",
+        action: "Failed",
         msg: error.response.data.message,
       });
     }
   }
   return (
     <>
-      <h1>Change Password</h1>
       <Layout title="Change Password">
         <div>
           <form className="changePwdForm" onSubmit={(e) => handlepwdForm(e)}>
+            <h3>Update your password here</h3>
             <label htmlFor="new_password">New Password</label>
             <input
               type="password"
