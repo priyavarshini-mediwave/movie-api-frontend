@@ -22,13 +22,14 @@ body {
   padding-left: 20px;
 }
 .iMDB {
-  background-color: rgb(224, 224, 121);
+  background-color: #e4b721;
   padding: 10px;
   width: 100px;
   height: 50px;
+  border-radius: 10px;
 }
 .iMDB p {
-  color: red;
+  color: black;
   font-size: x-large;
   font-weight: bolder;
 }

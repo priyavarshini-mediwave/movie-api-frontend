@@ -165,7 +165,7 @@ const Home = () => {
             <div className="HomeName grid">
               <div>
                 <div className="iMDB">
-                  <p>iMDB</p>
+                  <p>IMDb</p>
                 </div>
               </div>
 

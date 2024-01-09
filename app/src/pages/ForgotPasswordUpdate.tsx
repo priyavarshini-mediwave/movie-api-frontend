@@ -51,7 +51,7 @@ const ForgotPasswordUpdate = () => {
             ChangePasswordPayload,
             user_id || ""
           );
-          console.log("changenewPwd", changenewPwd);
+
           if (changenewPwd) {
             navigate("/login");
             setNewPass("");
@@ -78,8 +78,12 @@ const ForgotPasswordUpdate = () => {
           show: true,
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setShowModalMsg({
+        action: "failed",
+        msg: error.response.data.message,
+      });
     }
   }
   return (

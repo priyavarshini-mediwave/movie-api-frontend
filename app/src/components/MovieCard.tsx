@@ -46,15 +46,12 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
             msg: `Rating Added Successfully`,
           });
         }
-      } catch (error) {
-        if (error instanceof Error) {
-          setShowModal(true);
-
-          setShowModalMsg({
-            action: "Unable to show movies",
-            msg: error.message,
-          });
-        }
+      } catch (error: any) {
+        setShowModal(true);
+        setShowModalMsg({
+          action: "Unable to show movies",
+          msg: error.response.data.message,
+        });
       } finally {
         setIsLoading(false);
         toggleModal();
