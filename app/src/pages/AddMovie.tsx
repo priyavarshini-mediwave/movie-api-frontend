@@ -19,45 +19,58 @@ const AddMovie = () => {
     movie_name: "",
     movie_desc: "",
     release_year: "",
+    file: "",
   });
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setAddMovie({ ...addMovie, [name]: value });
   }
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setAddMovie({
+        ...addMovie,
+        file: e.target.files[0],
+      });
+    }
+  };
   const handleAddMovie = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleAddMovietoDb(addMovie);
   };
   async function handleAddMovietoDb(addMovie: IMovie) {
     setIsLoading(true);
+    const formData = new FormData();
     try {
-      const MovieAddPayload = {
-        movie_name: addMovie.movie_name,
-        movie_desc: addMovie.movie_desc,
-        release_year: addMovie.release_year,
-      };
+      // const MovieAddPayload = {
+      //   movie_name: addMovie.movie_name,
+      //   movie_desc: addMovie.movie_desc,
+      //   release_year: addMovie.release_year,
+      // };
+      formData.append("movie_name", addMovie.movie_name);
+      formData.append("movie_desc", addMovie.movie_desc);
+      formData.append("release_year", addMovie.release_year);
+      formData.append("file", addMovie.file as File);
       {
         isLoading ? <p>Loading</p> : <></>;
       }
-      const addedMovie = await addMovieApi(MovieAddPayload);
+      const addedMovie = await addMovieApi(formData);
       if (addedMovie) {
         // toggleModal();
         setShowModalMsg({
           action: "Success",
-          msg: `Movie  "${MovieAddPayload.movie_name}" Added Successfully`,
+          msg: `Movie  "${addMovie.movie_name}" Added Successfully`,
         });
         console.log(addedMovie);
       }
 
       //navigate("/");
-    } catch (error) {
+    } catch (error: any) {
       console.log("Errored", error);
-      if (error instanceof Error) {
-        setShowModalMsg({
-          action: "failed",
-          msg: error.message,
-        });
-      }
+
+      setShowModalMsg({
+        action: "Failed",
+        msg: error.response.data.message,
+      });
     } finally {
       setIsLoading(false);
       toggleModal();
@@ -94,7 +107,12 @@ const AddMovie = () => {
               onChange={(e) => handleInputChange(e)}
             ></input>
             <label htmlFor="movieImg">Upload the movie Image:</label>
-            <input type="file" id="movieImg" name="movieImg"></input>
+            <input
+              type="file"
+              id="movieImg"
+              name="movieImg"
+              onChange={(e) => handleFile(e)}
+            ></input>
 
             <div className="AddMovie-AddBtns">
               <Link to="/" role="button" className="AddMovie-CancelBtn">
@@ -115,9 +133,3 @@ const AddMovie = () => {
   );
 };
 export default AddMovie;
-// user_id: string;
-//   movie_name: string;
-//   movie_desc: string;
-//   release_year: number | undefined;
-//   rating: number;
-// }

@@ -82,7 +82,7 @@ export const getMovies = (
     }
   );
 };
-export const addMovieApi = (payload: IMovie) => {
+export const addMovieApi = (payload: FormData) => {
   return axiosInstance.post("/movies", payload, setHeaders());
 };
 export const getOneMovieApi = (movie_id: string) => {

@@ -45,6 +45,7 @@ interface IMovie {
   movie_name: string;
   movie_desc: string;
   release_year: string;
+  file: File | string;
 }
 interface IMovietoshow {
   movie_id: string;

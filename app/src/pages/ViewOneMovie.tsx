@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getOneMovieApi } from "../services/api";
 import { Rating } from "@mui/material";
+import movieLogo from "../assets/movieLogo.jpeg";
 const ViewOneMovie = () => {
   const [viewOneMovie, setViewOneMovie] = useState({
     movie_id: "",
@@ -32,6 +33,9 @@ const ViewOneMovie = () => {
     <>
       <div className="viewOneMovie">
         <h1>{viewOneMovie.movie_name}</h1>
+        <div className="bigMovieDiv">
+          <img src={movieLogo} alt={`Pic-${viewOneMovie.movie_name}`}></img>
+        </div>
         <div className="grid">
           <div className="Moviedetails">
             <p>
