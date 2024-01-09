@@ -4,6 +4,7 @@ import Rating from "@mui/material/Rating";
 
 import { IMovietoshow, IShowError } from "../Interfaces/interfaces";
 import Modal from "./Modal";
+import movieLogo from "../assets/movieLogo.jpeg";
 const Loading = lazy(() => import("./Loading"));
 
 import { addRatingApi, deleteMovieApi } from "../services/api";
@@ -94,7 +95,9 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
     <>
       <div className="movieCard"></div>
       <h3>{movie.movie_name}</h3>
-
+      <div className="image-block ">
+        <img src={movieLogo} alt={`Pic-${movie.movie_name}`}></img>
+      </div>
       <p className="movie_desc"> {movie.movie_desc}</p>
       <p className="release_year">Released In: {movie.release_year}</p>
 

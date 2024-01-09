@@ -93,6 +93,8 @@ const AddMovie = () => {
               placeholder="Enter Movie Release Year"
               onChange={(e) => handleInputChange(e)}
             ></input>
+            <label htmlFor="movieImg">Upload the movie Image:</label>
+            <input type="file" id="movieImg" name="movieImg"></input>
 
             <div className="AddMovie-AddBtns">
               <Link to="/" role="button" className="AddMovie-CancelBtn">
