@@ -54,6 +54,7 @@ interface IMovietoshow {
   movie_desc: string;
   release_year: string;
   rating?: number;
+  movie_img_path: string;
 }
 interface IaddRatingPayload {
   rating_value: number;

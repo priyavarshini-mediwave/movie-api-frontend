@@ -96,7 +96,10 @@ const MovieCard: React.FC<IMovieCard> = ({ movie }) => {
       <div className="movieCard"></div>
       <h3>{movie.movie_name}</h3>
       <div className="image-block ">
-        <img src={movieLogo} alt={`Pic-${movie.movie_name}`}></img>
+        <img
+          src={`http://localhost:3456/uploads/${movie.movie_img_path}`}
+          alt={`Pic-${movie.movie_name}`}
+        ></img>
       </div>
       <p className="movie_desc"> {movie.movie_desc}</p>
       <p className="release_year">Released In: {movie.release_year}</p>
