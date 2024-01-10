@@ -280,7 +280,7 @@ body {
   display: flex;
   justify-content: center;
   margin: auto;
-  max-width: 600px;
+  max-width: 500px;
   height: 300px;
   margin-bottom: 30px;
   background-color: #585858;

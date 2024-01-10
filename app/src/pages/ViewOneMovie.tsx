@@ -9,6 +9,7 @@ const ViewOneMovie = () => {
     movie_name: "",
     movie_desc: "",
     release_year: 0,
+    movie_img_path: "",
     addedBy: "",
     overallRating: 0,
     ratings: [{ rating: 0, ratedBy: "" }],
@@ -34,7 +35,10 @@ const ViewOneMovie = () => {
       <div className="viewOneMovie">
         <h1>{viewOneMovie.movie_name}</h1>
         <div className="bigMovieDiv">
-          <img src={movieLogo} alt={`Pic-${viewOneMovie.movie_name}`}></img>
+          <img
+            src={`http://localhost:3456/uploads/${viewOneMovie.movie_img_path}`}
+            alt={`Pic-${viewOneMovie.movie_name}`}
+          ></img>
         </div>
         <div className="grid">
           <div className="Moviedetails">
