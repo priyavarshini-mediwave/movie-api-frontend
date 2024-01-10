@@ -19,13 +19,14 @@
         * Update User Details
         * Update Password
         * Logout
-        * Forgot Password flow => Send Otp in email,verify otp,update the password
+        * Forgot Password flow => Send Otp in email,verify otp,update the password.
     Movies
-        * Add a Movie with file upload for image
-        * Show all Movies with Overall Rating , Search and Sort Optiond
-        * View Details of a movie - with Added by and Rating Details
-        * Add Rating
-        * Update and Delete movie options for the user who added the movie
+        * Add a Movie with file upload for image.
+        * Has image url hosting.
+        * Show all Movies with Movie Picture, Overall Rating , Search and Sort Options.
+        * View Details of a movie - with Added by and Rating Details.
+        * Add Rating.
+        * Update and Delete movie options for the user who added the movie.
 
 ##### Pagination and Rating with Material UI
 
