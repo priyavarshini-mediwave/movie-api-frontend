@@ -10,7 +10,8 @@ import {
   IOtpVerify,
   IchangePwd,
 } from "../Interfaces/interfaces";
-//import { IMovieAdd } from "../Interfaces/Interface";
+
+import { jwtDecode } from "jwt-decode";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3456",
   //   timeout: 1000,
@@ -20,13 +21,21 @@ const setHeaders = () => {
   const token = localStorage.getItem("token");
   let headers = {};
   if (token) {
-    headers = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    let decodedToken = jwtDecode(token);
+    let currentDate = new Date();
+    if (decodedToken.exp && decodedToken.exp < currentDate.getTime() / 1000) {
+      console.log("Token expired.");
+      localStorage.clear();
+      location.reload();
+    } else {
+      headers = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return headers;
+    }
   }
-  return headers;
 };
 
 //User Routes
