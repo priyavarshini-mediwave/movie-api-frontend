@@ -15,6 +15,7 @@ import MovieCard from "../components/MovieCard";
 import UserModal from "./UserModal";
 import logo from "../assets/placeholder.jpg";
 import christmas from "../assets/santa-dance-christmas-music.gif";
+// import movieCam from "../assets/movieCam.jpg";
 import Modal from "../components/Modal";
 
 // Home Component starts here
@@ -184,7 +185,7 @@ const Home = () => {
               </div>
             </div>
             <div className="SearchDiv grid">
-              <img src={christmas} alt="santa"></img>
+              <img src={christmas} alt="christmas"></img>
 
               <label htmlFor="search" className="search">
                 <input
